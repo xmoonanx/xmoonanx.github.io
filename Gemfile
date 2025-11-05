@@ -6,6 +6,8 @@ gemspec
 
 gem "html-proofer", "~> 5.0", group: :test
 
+gem "sass-embedded", "~> 1.70.0"  # 이전 안정 버전으로 고정
+
 platforms :mingw, :x64_mingw, :mswin, :jruby do
   gem "tzinfo", ">= 1", "< 3"
   gem "tzinfo-data"
