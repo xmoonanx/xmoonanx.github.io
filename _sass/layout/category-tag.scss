@@ -16,6 +16,9 @@
     padding: $space-lg $space-md;
     margin-bottom: $space-lg;
     transition: box-shadow 0.2s ease;
+    max-width: 100%;
+    width: 100%;
+    overflow: hidden;
 
     &:hover {
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
@@ -43,6 +46,7 @@
   ul > li {
     line-height: 1.5rem;
     padding: 0.5rem 0;
+    min-width: 0;
 
     /* dot */
     &::before {
@@ -63,6 +67,15 @@
       @extend %no-bottom-border;
 
       font-size: 1rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 70%;
+    }
+
+    /* date/time */
+    .text-muted.small {
+      flex-shrink: 0;
     }
   }
 }

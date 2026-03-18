@@ -23,14 +23,22 @@
 
 .post-layout-row {
   column-gap: 2rem;
+  justify-content: flex-start !important;
+
+  @media (min-width: 1200px) {
+    position: relative;
+    padding-right: calc(280px + 2.5rem);
+  }
 
   .post-main {
+    width: 100%;
     max-width: 780px;
-    flex: 0 0 auto;
+    flex: 1 1 auto;
 
     @media (min-width: 1200px) {
       margin-left: auto;
-      margin-right: calc(280px + 2.5rem);
+      margin-right: auto;
+      transform: translateX(6rem);
     }
   }
 
