@@ -63,7 +63,7 @@ class ResultSwitch {
       content.forEach((el) => {
         el.classList.remove(UNLOADED);
       });
-      input.textContent = '';
+      input.value = '';
       this.resultVisible = false;
     }
   }
@@ -76,7 +76,6 @@ function isMobileView() {
 export function displaySearch() {
   btnSearchTrigger.addEventListener('click', () => {
     MobileSearchBar.on();
-    ResultSwitch.on();
     input.focus();
   });
 
@@ -95,14 +94,10 @@ export function displaySearch() {
 
   input.addEventListener('input', () => {
     if (input.value === '') {
-      if (isMobileView()) {
-        hints.classList.remove(UNLOADED);
-      } else {
-        ResultSwitch.off();
-      }
+      ResultSwitch.off();
     } else {
       ResultSwitch.on();
-      if (isMobileView()) {
+      if (hints) {
         hints.classList.add(UNLOADED);
       }
     }

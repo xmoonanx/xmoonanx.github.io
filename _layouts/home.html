@@ -139,6 +139,8 @@ refactor: true
           {% endif %}
         {% endfor %}
         {% assign sub_categories_size = sub_categories | size %}
+        {% assign sub_categories = sub_categories | sort %}
+        {% assign sub_preview = sub_categories | slice: 0, 2 | join: ' · ' %}
         
         <a href="{{ _category_url | relative_url }}" class="category-card" data-testid="category-{{ category_name | slugify }}">
           <div class="category-icon">
@@ -171,6 +173,9 @@ refactor: true
                 {{ site.data.locales[lang].categories.post_measure.singular | default: 'post' }}
               {% endif %}
             </span>
+            {% if sub_preview != '' %}
+              <span class="category-preview">{{ sub_preview }}</span>
+            {% endif %}
           </div>
         </a>
       {% endfor %}

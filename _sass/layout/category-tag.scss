@@ -9,6 +9,20 @@
 
 #page-category,
 #page-tag {
+  .category-group {
+    &:not(:last-child) {
+      margin-bottom: 2rem;
+    }
+  }
+
+  .category-group-title {
+    font-family: $font-family-heading;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--heading-color);
+    margin-bottom: 0.75rem;
+  }
+
   ul > li {
     line-height: 1.5rem;
     padding: 0.6rem 0;
@@ -65,6 +79,10 @@
       > a {
         @include text-ellipsis;
       }
+    }
+
+    .category-group-title {
+      font-size: 1.1rem;
     }
   }
 }

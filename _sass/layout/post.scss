@@ -21,6 +21,28 @@
   margin: 0 auto;
 }
 
+.post-layout-row {
+  column-gap: 1.5rem;
+
+  .post-main {
+    max-width: 860px;
+  }
+
+  .post-article {
+    max-width: 860px;
+  }
+
+  .post-panel {
+    display: none;
+
+    @media (min-width: 1200px) {
+      display: block;
+      max-width: 260px;
+      padding-left: 0;
+    }
+  }
+}
+
 .post-header {
   margin-bottom: 2rem;
 }
@@ -435,6 +457,7 @@
   position: -webkit-sticky;
   position: sticky;
   top: 5rem;
+  max-width: 240px;
   transition: top 0.2s ease-in-out;
   -webkit-animation: fade-up 0.8s;
   animation: fade-up 0.8s;

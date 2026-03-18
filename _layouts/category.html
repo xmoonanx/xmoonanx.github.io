@@ -12,13 +12,60 @@ layout: page
     <span class="lead text-muted ps-2">{{ page.posts | size }}</span>
   </h1>
 
-  <ul class="content ps-0">
+  {% assign sub_categories = '' | split: '' %}
+  {% assign direct_posts = '' | split: '' %}
+
+  {% for post in page.posts %}
+    {% assign second_category = post.categories[1] %}
+    {% if second_category %}
+      {% unless sub_categories contains second_category %}
+        {% assign sub_categories = sub_categories | push: second_category %}
+      {% endunless %}
+    {% else %}
+      {% assign direct_posts = direct_posts | push: post %}
+    {% endif %}
+  {% endfor %}
+
+  {% assign sub_categories = sub_categories | sort %}
+
+  {% if direct_posts.size > 0 %}
+    <section class="category-group">
+      <h2 class="category-group-title ps-lg-2">{{ page.title }}</h2>
+      <ul class="content ps-0">
+        {% assign sorted_direct_posts = direct_posts | sort: 'date' | reverse %}
+        {% for post in sorted_direct_posts %}
+          <li class="d-flex justify-content-between px-md-3">
+            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+            <span class="dash flex-grow-1"></span>
+            {% include datetime.html date=post.date class='text-muted small text-nowrap' lang=lang %}
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endif %}
+
+  {% for sub_category in sub_categories %}
+    {% assign grouped_posts = '' | split: '' %}
+
     {% for post in page.posts %}
-      <li class="d-flex justify-content-between px-md-3">
-        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-        <span class="dash flex-grow-1"></span>
-        {% include datetime.html date=post.date class='text-muted small text-nowrap' lang=lang %}
-      </li>
+      {% if post.categories[1] == sub_category %}
+        {% assign grouped_posts = grouped_posts | push: post %}
+      {% endif %}
     {% endfor %}
-  </ul>
+
+    {% assign grouped_posts = grouped_posts | sort: 'date' | reverse %}
+
+    <section class="category-group">
+      <h2 class="category-group-title ps-lg-2">{{ sub_category }}</h2>
+      <ul class="content ps-0">
+        {% for post in grouped_posts %}
+          <li class="d-flex justify-content-between px-md-3">
+            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+            <span class="dash flex-grow-1"></span>
+            {% include datetime.html date=post.date class='text-muted small text-nowrap' lang=lang %}
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endfor %}
 </div>
