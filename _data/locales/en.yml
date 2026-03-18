@@ -22,6 +22,14 @@ search:
   cancel: Cancel
   no_results: Oops! No results found.
 
+home:
+  hero_eyebrow: Notes on systems, security, and engineering craft
+  browse_recent: Browse recent posts
+  explore_categories: Explore categories
+  view_all_categories: View all categories
+  featured: Featured
+  recent: Recent
+
 panel:
   lastmod: Recently Updated
   trending_tags: Trending Tags

@@ -50,8 +50,15 @@ refactor: true
 <div class="home-wrapper" data-testid="home-wrapper">
   <section class="hero-section" data-testid="hero-section">
     <div class="hero-content">
+      <p class="hero-eyebrow">{{ site.data.locales[lang].home.hero_eyebrow | default: 'Notes on systems, security, and engineering craft' }}</p>
       <h1 class="hero-title">{{ site.title }}</h1>
       <p class="hero-tagline">{{ site.tagline }}</p>
+      <div class="hero-actions">
+        <a href="#recent-posts" class="hero-link hero-link-primary">{{ site.data.locales[lang].home.browse_recent | default: 'Browse recent posts' }}</a>
+        {% if site.categories.size > 0 %}
+          <a href="{{ '/categories/' | relative_url }}" class="hero-link">{{ site.data.locales[lang].home.explore_categories | default: 'Explore categories' }}</a>
+        {% endif %}
+      </div>
     </div>
   </section>
 
@@ -59,7 +66,7 @@ refactor: true
   <section class="featured-section" data-testid="featured-section">
     <h2 class="section-title">
       <span class="section-icon"><i class="fas fa-thumbtack"></i></span>
-      {{ site.data.locales[lang].post.pin_prompt | default: "Featured" }}
+      {{ site.data.locales[lang].home.featured | default: 'Featured' }}
     </h2>
     <div class="featured-grid">
       {% for post in all_pinned limit: 3 %}
@@ -91,14 +98,80 @@ refactor: true
   </section>
   {% endif %}
 
-  <section class="posts-section" data-testid="posts-section">
+{% assign sorted_categories = site.categories | sort %}
+{% assign top_categories = '' | split: '' %}
+{% for category in sorted_categories %}
+  {% assign category_name = category | first %}
+  {% assign posts_of_category = category | last %}
+  {% assign is_top_category = false %}
+  {% for category_post in posts_of_category %}
+    {% if category_post.categories[0] == category_name %}
+      {% assign is_top_category = true %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+  {% if is_top_category %}
+    {% assign top_categories = top_categories | push: category %}
+  {% endif %}
+{% endfor %}
+
+{% assign category_count = top_categories | size %}
+
+  {% if category_count > 0 %}
+  <section class="categories-section" data-testid="categories-section">
+    <h2 class="section-title">
+      <span class="section-icon"><i class="fas fa-layer-group"></i></span>
+      {{ site.data.locales[lang].tabs.categories | default: "Categories" }}
+    </h2>
+    <div class="categories-grid">
+      {% for category in top_categories limit: 6 %}
+        {% assign category_name = category | first %}
+        {% assign posts_of_category = category | last %}
+        {% capture _category_url %}/categories/{{ category_name | slugify | url_encode }}/{% endcapture %}
+        <a href="{{ _category_url | relative_url }}" class="category-card" data-testid="category-{{ category_name | slugify }}">
+          <div class="category-icon">
+            <i class="far fa-folder"></i>
+          </div>
+          <div class="category-info">
+            <span class="category-name">{{ category_name }}</span>
+            <span class="category-count">
+              {{ posts_of_category | size }}
+              {% if posts_of_category.size > 1 %}
+                {{ site.data.locales[lang].categories.post_measure.plural | default: 'posts' }}
+              {% else %}
+                {{ site.data.locales[lang].categories.post_measure.singular | default: 'post' }}
+              {% endif %}
+            </span>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+    {% if category_count > 6 %}
+    <div class="categories-cta">
+      <a href="{{ '/categories/' | relative_url }}" class="categories-link">
+        <span>{{ site.data.locales[lang].home.view_all_categories | default: 'View all categories' }}</span>
+        <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+    {% endif %}
+  </section>
+  {% endif %}
+
+  <section id="recent-posts" class="posts-section" data-testid="posts-section">
     <h2 class="section-title">
       <span class="section-icon"><i class="fas fa-clock"></i></span>
-      {{ site.data.locales[lang].tabs.home | default: "Recent" }}
+      {{ site.data.locales[lang].home.recent | default: 'Recent' }}
     </h2>
     <div id="post-list" class="post-list">
       {% for post in posts %}
-        <article class="post-card" data-testid="post-{{ forloop.index }}">
+        {% assign post_card_classes = 'post-card' %}
+        {% if forloop.first and paginator.page == 1 and post.image %}
+          {% assign post_card_classes = post_card_classes | append: ' post-card-lead' %}
+        {% endif %}
+        {% unless post.image %}
+          {% assign post_card_classes = post_card_classes | append: ' post-card-text-only' %}
+        {% endunless %}
+        <article class="{{ post_card_classes }}" data-testid="post-{{ forloop.index }}">
           <a href="{{ post.url | relative_url }}" class="post-link">
             {% if post.image %}
               {% assign image_src = post.image.path | default: post.image %}
