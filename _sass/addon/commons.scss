@@ -1195,11 +1195,11 @@ sup {
 
 @media all and (max-width: 768px) {
   #topbar {
-    @extend %full-width;
+    max-width: 100%;
   }
 
   #main-wrapper > .container {
-    @extend %full-width;
+    max-width: 100%;
     @include pl-pr(0);
   }
 }
