@@ -1,65 +1,63 @@
-<!-- The Top Bar -->
+<!-- The Top Bar - Editorial Header -->
 
-<header id="topbar-wrapper" aria-label="Top Bar">
-  <div
-    id="topbar"
-    class="d-flex align-items-center justify-content-between px-lg-3 h-100"
-  >
-    <nav id="breadcrumb" aria-label="Breadcrumb">
-      {% assign paths = page.url | split: '/' %}
+<header id="topbar-wrapper" aria-label="Site Header" data-testid="site-header">
+  <div id="topbar" class="d-flex align-items-center justify-content-between h-100">
+    <!-- Site Branding -->
+    <a href="{{ '/' | relative_url }}" class="site-branding d-flex align-items-center text-decoration-none" data-testid="site-brand">
+      {%- if site.avatar != empty and site.avatar -%}
+        {%- capture avatar_url -%}
+          {% include media-url.html src=site.avatar %}
+        {%- endcapture -%}
+        <img src="{{- avatar_url -}}" width="32" height="32" alt="{{ site.title }} avatar" class="site-avatar rounded-circle">
+      {%- endif -%}
+      <span class="site-name">{{ site.title }}</span>
+    </a>
 
-      {% if paths.size == 0 or page.layout == 'home' %}
-        <!-- index page -->
-        <span>{{ site.data.locales[include.lang].tabs.home | capitalize }}</span>
-
-      {% else %}
-        {% for item in paths %}
-          {% if forloop.first %}
-            <span>
-              <a href="{{ '/' | relative_url }}">
-                {{- site.data.locales[include.lang].tabs.home | capitalize -}}
-              </a>
-            </span>
-
-          {% elsif forloop.last %}
-            {% if page.collection == 'tabs' %}
-              <span>{{ site.data.locales[include.lang].tabs[item] | default: page.title }}</span>
-            {% else %}
-              <span>{{ page.title }}</span>
-            {% endif %}
-
-          {% elsif page.layout == 'category' or page.layout == 'tag' %}
-            <span>
-              <a href="{{ item | append: '/' | relative_url }}">
-                {{- site.data.locales[include.lang].tabs[item] | default: page.title -}}
-              </a>
-            </span>
-          {% endif %}
+    <!-- Navigation -->
+    <nav id="main-nav" class="d-none d-lg-flex align-items-center" aria-label="Main Navigation" data-testid="main-nav">
+      <ul class="nav-list d-flex list-unstyled mb-0">
+        <!-- home -->
+        <li class="nav-item{% if page.layout == 'home' %} active{% endif %}">
+          <a href="{{ '/' | relative_url }}" class="nav-link">
+            <span>{{ site.data.locales[include.lang].tabs.home | capitalize }}</span>
+          </a>
+        </li>
+        <!-- the real tabs -->
+        {% for tab in site.tabs %}
+          <li class="nav-item{% if tab.url == page.url %} active{% endif %}">
+            <a href="{{ tab.url | relative_url }}" class="nav-link">
+              {% capture tab_name %}{{ tab.url | split: '/' }}{% endcapture %}
+              <span>{{ site.data.locales[include.lang].tabs[tab_name] | default: tab.title | capitalize }}</span>
+            </a>
+          </li>
         {% endfor %}
-      {% endif %}
+      </ul>
     </nav>
-    <!-- endof #breadcrumb -->
 
-    <button type="button" id="sidebar-trigger" class="btn btn-link">
-      <i class="fas fa-bars fa-fw"></i>
-    </button>
+    <div id="topbar-title">{{ page.title | default: site.title }}</div>
 
-    <div id="topbar-title">
-      {% if page.layout == 'home' %}
-        {{- site.data.locales[include.lang].title | default: site.title -}}
-      {% elsif page.collection == 'tabs' or page.layout == 'page' %}
-        {%- capture tab_key -%}{{ page.url | split: '/' }}{%- endcapture -%}
-        {{- site.data.locales[include.lang].tabs[tab_key] | default: page.title -}}
-      {% else %}
-        {{- site.data.locales[include.lang].layout[page.layout] | default: page.layout | capitalize -}}
-      {% endif %}
+    <!-- Right Actions -->
+    <div class="header-actions d-flex align-items-center">
+      <!-- Search -->
+      <button type="button" id="search-trigger" class="btn btn-link header-btn" aria-label="Search">
+        <i class="fas fa-search fa-fw"></i>
+      </button>
+
+      <!-- Theme Toggle -->
+      {% unless site.theme_mode %}
+        <button type="button" class="btn btn-link header-btn nav-link" aria-label="Switch Mode" id="mode-toggle">
+          <i class="fas fa-adjust"></i>
+        </button>
+      {% endunless %}
+
+      <!-- Mobile Menu Toggle -->
+      <button type="button" id="sidebar-trigger" class="btn btn-link header-btn d-lg-none" aria-label="Menu">
+        <i class="fas fa-bars fa-fw"></i>
+      </button>
     </div>
 
-    <button type="button" id="search-trigger" class="btn btn-link">
-      <i class="fas fa-search fa-fw"></i>
-    </button>
-
-    <search id="search" class="align-items-center ms-3 ms-lg-0">
+    <!-- Search Input -->
+    <search id="search" class="align-items-center">
       <i class="fas fa-search fa-fw"></i>
       <input
         class="form-control"

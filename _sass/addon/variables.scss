@@ -1,34 +1,58 @@
 /*
  * The SCSS variables
+ * Editorial redesign - warm, refined aesthetic
  */
 
-/* sidebar */
+/* Layout - Top-header instead of dominant sidebar */
 
-$sidebar-width: 260px !default; /* the basic width */
-$sidebar-width-large: 300px !default; /* screen width: >= 1650px */
+$sidebar-width: 0px !default; /* Hidden by default - using top nav */
+$sidebar-width-large: 0px !default;
 $sb-btn-gap: 0.8rem !default;
 $sb-btn-gap-lg: 1rem !default;
 
 /* other framework sizes */
 
-$topbar-height: 3rem !default;
-$search-max-width: 200px !default;
-$footer-height: 5rem !default;
-$footer-height-large: 6rem !default; /* screen width: < 850px */
-$main-content-max-width: 1250px !default;
+$topbar-height: 4rem !default;
+$header-height: 4rem !default;
+$search-max-width: 280px !default;
+$footer-height: 3.5rem !default;
+$footer-height-large: 4rem !default;
+$main-content-max-width: 720px !default;
+$content-max-width: 720px !default;
 $radius-sm: 6px !default;
-$radius-lg: 10px !default;
-$back2top-size: 2.75rem !default;
+$radius-lg: 12px !default;
+$back2top-size: 2.5rem !default;
 
 /* syntax highlight */
 
-$code-font-size: 0.85rem !default;
-$code-header-height: 2.25rem !default;
+$code-font-size: 0.9rem !default;
+$code-header-height: 2.5rem !default;
 $code-dot-size: 0.75rem !default;
 $code-dot-gap: 0.5rem !default;
 $code-icon-width: 1.75rem !default;
 
-/* fonts */
+/* fonts - Editorial feel */
 
-$font-family-base: 'Source Sans Pro', 'Microsoft Yahei', sans-serif !default;
-$font-family-heading: Lato, 'Microsoft Yahei', sans-serif !default;
+$font-family-base: 'Source Sans 3', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !default;
+$font-family-heading: 'Playfair Display', Georgia, 'Times New Roman', serif !default;
+$font-family-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace !default;
+
+/* Spacing scale */
+
+$space-xs: 0.25rem !default;
+$space-sm: 0.5rem !default;
+$space-md: 1rem !default;
+$space-lg: 1.5rem !default;
+$space-xl: 2rem !default;
+$space-2xl: 3rem !default;
+$space-3xl: 4rem !default;
+
+/* Typography scale */
+
+$type-scale-sm: 0.875rem !default;
+$type-scale-base: 1rem !default;
+$type-scale-lg: 1.125rem !default;
+$type-scale-xl: 1.25rem !default;
+$type-scale-2xl: 1.5rem !default;
+$type-scale-3xl: 2rem !default;
+$type-scale-4xl: 2.5rem !default;

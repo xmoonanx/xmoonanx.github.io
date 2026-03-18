@@ -1,49 +1,49 @@
-<!-- The Footer -->
+<!-- The Footer - Compact Editorial Style -->
 
 <footer
   aria-label="Site Info"
-  class="
-    d-flex flex-column justify-content-center text-muted
-    flex-lg-row justify-content-lg-between align-items-lg-center pb-lg-3
-  "
+  class="site-footer"
+  data-testid="site-footer"
 >
-  <p>
-    {{- '©' }}
-    <time>{{ 'now' | date: '%Y' }}</time>
+  <div class="footer-content d-flex flex-column flex-md-row justify-content-between align-items-center">
+    <div class="footer-left">
+      <p class="copyright mb-0">
+        {{- '©' }}
+        <time>{{ 'now' | date: '%Y' }}</time>
 
-    {% if site.social.links %}
-      <a href="{{ site.social.links[0] }}">{{ site.social.name }}</a>.
-    {% else %}
-      <em class="fst-normal">{{ site.social.name }}</em>.
-    {% endif %}
+        {% if site.social.links %}
+          <a href="{{ site.social.links[0] }}">{{ site.social.name }}</a>.
+        {% else %}
+          <span>{{ site.social.name }}</span>.
+        {% endif %}
 
-    {% if site.data.locales[include.lang].copyright.brief %}
-      <span
-        data-bs-toggle="tooltip"
-        data-bs-placement="top"
-        title="{{ site.data.locales[include.lang].copyright.verbose }}"
-      >
-        {{- site.data.locales[include.lang].copyright.brief -}}
-      </span>
-    {% endif %}
-  </p>
+        {% if site.data.locales[include.lang].copyright.brief %}
+          <span class="copyright-detail d-none d-md-inline">
+            {{- site.data.locales[include.lang].copyright.brief -}}
+          </span>
+        {% endif %}
+      </p>
+    </div>
 
-  <p>
-    {%- capture _platform -%}
-      <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a>
-    {%- endcapture -%}
+    <div class="footer-right">
+      <p class="powered-by mb-0">
+        {%- capture _platform -%}
+          <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a>
+        {%- endcapture -%}
 
-    {%- capture _theme -%}
-      <a
-        data-bs-toggle="tooltip"
-        data-bs-placement="top"
-        title="v{{ theme.version }}"
-        href="https://github.com/cotes2020/jekyll-theme-chirpy"
-        target="_blank"
-        rel="noopener"
-      >Chirpy</a>
-    {%- endcapture -%}
+        {%- capture _theme -%}
+          <a
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            title="v{{ theme.version }}"
+            href="https://github.com/cotes2020/jekyll-theme-chirpy"
+            target="_blank"
+            rel="noopener"
+          >Chirpy</a>
+        {%- endcapture -%}
 
-    {{ site.data.locales[include.lang].meta | replace: ':PLATFORM', _platform | replace: ':THEME', _theme }}
-  </p>
+        {{ site.data.locales[include.lang].meta | replace: ':PLATFORM', _platform | replace: ':THEME', _theme }}
+      </p>
+    </div>
+  </div>
 </footer>
