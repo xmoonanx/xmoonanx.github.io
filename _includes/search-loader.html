@@ -16,17 +16,41 @@
   </article>
 {% endcapture %}
 
-{% capture not_found %}<p class="mt-5">{{ site.data.locales[include.lang].search.no_results }}</p>{% endcapture %}
+{% capture not_found %}
+  <div class="search-feedback mt-5 text-center">
+    <p class="mb-2">{{ site.data.locales[include.lang].search.no_results }}</p>
+    <p class="small text-muted mb-0">{{ site.data.locales[include.lang].search.guidance }}</p>
+  </div>
+{% endcapture %}
+
+{% capture unavailable %}
+  <div class="search-feedback mt-5 text-center">
+    <p class="mb-2">{{ site.data.locales[include.lang].search.unavailable }}</p>
+    <p class="small text-muted mb-0">{{ site.data.locales[include.lang].search.guidance }}</p>
+  </div>
+{% endcapture %}
 
 <script>
   {% comment %} Note: dependent library will be loaded in `js-selector.html` {% endcomment %}
   document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('search-input');
+    const resultsContainer = document.getElementById('search-results');
+
+    if (!searchInput || !resultsContainer) {
+      return;
+    }
+
+    if (typeof SimpleJekyllSearch === 'undefined') {
+      resultsContainer.innerHTML = `{{ unavailable | strip_newlines }}`;
+      return;
+    }
+
     SimpleJekyllSearch({
-      searchInput: document.getElementById('search-input'),
-      resultsContainer: document.getElementById('search-results'),
+      searchInput,
+      resultsContainer,
       json: '{{ '/assets/js/data/search.json' | relative_url }}',
       searchResultTemplate: '{{ result_elem | strip_newlines }}',
-      noResultsText: '{{ not_found }}',
+      noResultsText: `{{ not_found | strip_newlines }}`,
       templateMiddleware: function(prop, value, template) {
         if (prop === 'categories') {
           if (value === '') {

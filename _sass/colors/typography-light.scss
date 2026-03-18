@@ -1,125 +1,125 @@
 /*
  * The syntax light mode typography colors
- * Warm, editorial palette
+ * Clean white palette - editorial style
  */
 
 @mixin light-scheme {
   /* Framework color */
-  --main-bg: #faf9f7;
-  --mask-bg: rgba(180, 170, 160, 0.5);
-  --main-border-color: #e8e4df;
+  --main-bg: #ffffff;
+  --mask-bg: rgba(0, 0, 0, 0.3);
+  --main-border-color: #e5e5e5;
 
-  /* Common color - warm neutrals */
-  --text-color: #2d2a26;
-  --text-muted-color: #6b6560;
-  --text-muted-highlight-color: #b8860b;
-  --heading-color: #1a1816;
-  --label-color: #5c5650;
-  --blockquote-border-color: #d4cfc8;
-  --blockquote-text-color: #6b6560;
-  --link-color: #b8860b;
-  --link-underline-color: #d4cfc8;
+  /* Common color - clean neutrals */
+  --text-color: #171717;
+  --text-muted-color: #525252;
+  --text-muted-highlight-color: #1a7f37;
+  --heading-color: #0a0a0a;
+  --label-color: #404040;
+  --blockquote-border-color: #d4d4d4;
+  --blockquote-text-color: #525252;
+  --link-color: #1a7f37;
+  --link-underline-color: #d4d4d4;
   --button-bg: #ffffff;
-  --btn-border-color: #e0dbd4;
-  --btn-backtotop-color: #6b6560;
-  --btn-backtotop-border-color: #e8e4df;
-  --checkbox-color: #c5c5c5;
-  --checkbox-checked-color: #b8860b;
+  --btn-border-color: #e5e5e5;
+  --btn-backtotop-color: #525252;
+  --btn-backtotop-border-color: #e5e5e5;
+  --checkbox-color: #a3a3a3;
+  --checkbox-checked-color: #1a7f37;
   --img-bg: radial-gradient(
     circle,
     rgb(255, 255, 255) 0%,
-    rgb(245, 242, 238) 100%
+    rgb(250, 250, 250) 100%
   );
   --shimmer-bg: linear-gradient(
     90deg,
-    rgba(250, 250, 250, 0) 0%,
-    rgba(235, 230, 225, 1) 50%,
-    rgba(250, 250, 250, 0) 100%
+    rgba(255, 255, 255, 0) 0%,
+    rgba(240, 240, 240, 1) 50%,
+    rgba(255, 255, 255, 0) 100%
   );
 
   /* Header/Navigation */
-  --header-bg: rgba(250, 249, 247, 0.95);
-  --header-border-color: #e8e4df;
-  --nav-link-color: #5c5650;
-  --nav-link-hover-color: #b8860b;
+  --header-bg: rgba(255, 255, 255, 0.95);
+  --header-border-color: #e5e5e5;
+  --nav-link-color: #404040;
+  --nav-link-hover-color: #1a7f37;
 
   /* Sidebar - minimal, for mobile */
-  --site-title-color: #1a1816;
-  --site-subtitle-color: #6b6560;
-  --sidebar-bg: #faf9f7;
-  --sidebar-border-color: #e8e4df;
-  --sidebar-muted-color: #6b6560;
-  --sidebar-active-color: #1a1816;
-  --sidebar-hover-bg: rgba(184, 134, 11, 0.08);
+  --site-title-color: #0a0a0a;
+  --site-subtitle-color: #525252;
+  --sidebar-bg: #ffffff;
+  --sidebar-border-color: #e5e5e5;
+  --sidebar-muted-color: #525252;
+  --sidebar-active-color: #0a0a0a;
+  --sidebar-hover-bg: rgba(26, 127, 55, 0.08);
   --sidebar-btn-bg: #ffffff;
-  --sidebar-btn-color: #6b6560;
-  --avatar-border-color: #d4cfc8;
+  --sidebar-btn-color: #525252;
+  --avatar-border-color: #d4d4d4;
 
   /* Topbar */
-  --topbar-bg: rgba(250, 249, 247, 0.95);
-  --topbar-text-color: #2d2a26;
-  --search-border-color: #e0dbd4;
-  --search-icon-color: #a09a94;
-  --input-focus-border-color: #b8860b;
+  --topbar-bg: rgba(255, 255, 255, 0.95);
+  --topbar-text-color: #171717;
+  --search-border-color: #e5e5e5;
+  --search-icon-color: #737373;
+  --input-focus-border-color: #1a7f37;
 
   /* Home page */
-  --post-list-text-color: #5c5650;
-  --btn-patinator-text-color: #5c5650;
-  --btn-paginator-hover-color: rgba(184, 134, 11, 0.1);
-  --hero-bg: linear-gradient(135deg, #faf9f7 0%, #f5f2ee 100%);
+  --post-list-text-color: #404040;
+  --btn-patinator-text-color: #404040;
+  --btn-paginator-hover-color: rgba(26, 127, 55, 0.1);
+  --hero-bg: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
   --featured-card-bg: #ffffff;
-  --featured-card-shadow: 0 4px 20px rgba(45, 42, 38, 0.08);
+  --featured-card-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
 
   /* Posts */
-  --toc-highlight: #b8860b;
-  --toc-popup-border-color: #e0dbd4;
-  --btn-share-color: #6b6560;
-  --btn-share-hover-color: #b8860b;
+  --toc-highlight: #1a7f37;
+  --toc-popup-border-color: #e5e5e5;
+  --btn-share-color: #525252;
+  --btn-share-hover-color: #1a7f37;
   --card-bg: #ffffff;
-  --card-hovor-bg: #f8f6f3;
-  --card-shadow: 0 2px 12px rgba(45, 42, 38, 0.06);
-  --footnote-target-bg: rgba(184, 134, 11, 0.15);
-  --tb-odd-bg: #fdfcfa;
-  --tb-border-color: #e8e4df;
-  --dash-color: #d4cfc8;
-  --kbd-wrap-color: #d4cfc8;
+  --card-hovor-bg: #fafafa;
+  --card-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  --footnote-target-bg: rgba(26, 127, 55, 0.12);
+  --tb-odd-bg: #fefefe;
+  --tb-border-color: #e5e5e5;
+  --dash-color: #d4d4d4;
+  --kbd-wrap-color: #d4d4d4;
   --kbd-text-color: var(--text-color);
   --kbd-bg-color: #ffffff;
-  --prompt-text-color: rgba(45, 42, 38, 0.85);
-  --prompt-tip-bg: rgba(76, 175, 80, 0.12);
+  --prompt-text-color: rgba(23, 23, 23, 0.85);
+  --prompt-tip-bg: rgba(76, 175, 80, 0.1);
   --prompt-tip-icon-color: #4caf50;
-  --prompt-info-bg: rgba(33, 150, 243, 0.1);
+  --prompt-info-bg: rgba(33, 150, 243, 0.08);
   --prompt-info-icon-color: #2196f3;
-  --prompt-warning-bg: rgba(255, 152, 0, 0.12);
+  --prompt-warning-bg: rgba(255, 152, 0, 0.1);
   --prompt-warning-icon-color: #ff9800;
-  --prompt-danger-bg: rgba(244, 67, 54, 0.1);
+  --prompt-danger-bg: rgba(244, 67, 54, 0.08);
   --prompt-danger-icon-color: #f44336;
 
   /* Tags */
-  --tag-border: #e0dbd4;
+  --tag-border: #e5e5e5;
   --tag-shadow: var(--btn-border-color);
-  --tag-hover: rgba(184, 134, 11, 0.12);
-  --tag-bg: #f8f6f3;
-  --search-tag-bg: #f8f6f3;
+  --tag-hover: rgba(26, 127, 55, 0.1);
+  --tag-bg: #fafafa;
+  --search-tag-bg: #fafafa;
 
   /* Categories */
-  --categories-border: rgba(45, 42, 38, 0.1);
-  --categories-hover-bg: rgba(184, 134, 11, 0.08);
-  --categories-icon-hover-color: #b8860b;
+  --categories-border: rgba(0, 0, 0, 0.08);
+  --categories-hover-bg: rgba(26, 127, 55, 0.08);
+  --categories-icon-hover-color: #1a7f37;
 
   /* Archive */
-  --timeline-color: rgba(45, 42, 38, 0.08);
-  --timeline-node-bg: #b8860b;
+  --timeline-color: rgba(0, 0, 0, 0.06);
+  --timeline-node-bg: #1a7f37;
   --timeline-year-dot-color: #ffffff;
 
   /* Accent colors */
-  --accent-primary: #b8860b;
-  --accent-primary-light: rgba(184, 134, 11, 0.12);
-  --accent-secondary: #8b4513;
-  --accent-tertiary: #6b4423;
+  --accent-primary: #1a7f37;
+  --accent-primary-light: rgba(26, 127, 55, 0.1);
+  --accent-secondary: #2ea043;
+  --accent-tertiary: #238636;
 
   [class^='prompt-'] {
-    --link-underline-color: #d4cfc8;
+    --link-underline-color: #d4d4d4;
   }
 
   .dark {

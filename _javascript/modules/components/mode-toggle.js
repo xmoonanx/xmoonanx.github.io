@@ -2,14 +2,16 @@
  * Add listener for theme mode toggle
  */
 
-const $toggle = document.getElementById('mode-toggle');
+const toggles = document.querySelectorAll('[data-mode-toggle]');
 
 export function modeWatcher() {
-  if (!$toggle) {
+  if (toggles.length === 0) {
     return;
   }
 
-  $toggle.addEventListener('click', () => {
-    Theme.flip();
+  toggles.forEach((toggle) => {
+    toggle.addEventListener('click', () => {
+      Theme.flip();
+    });
   });
 }

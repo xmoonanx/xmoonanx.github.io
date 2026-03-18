@@ -15,9 +15,16 @@ layout: page
 {% for category in sort_categories %}
   {% assign category_name = category | first %}
   {% assign posts_of_category = category | last %}
-  {% assign first_post = posts_of_category | first %}
+  {% assign is_top_category = false %}
 
-  {% if category_name == first_post.categories[0] %}
+  {% for category_post in posts_of_category %}
+    {% if category_post.categories[0] == category_name %}
+      {% assign is_top_category = true %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+
+  {% if is_top_category %}
     {% assign sub_categories = '' | split: '' %}
 
     {% for post in posts_of_category %}

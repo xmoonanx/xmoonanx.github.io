@@ -8,19 +8,18 @@
   <div class="footer-content d-flex flex-column flex-md-row justify-content-between align-items-center">
     <div class="footer-left">
       <p class="copyright mb-0">
-        {{- '©' }}
+        <span class="copyright-symbol">©</span>
         <time>{{ 'now' | date: '%Y' }}</time>
 
         {% if site.social.links %}
-          <a href="{{ site.social.links[0] }}">{{ site.social.name }}</a>.
+          <a href="{{ site.social.links[0] }}" class="copyright-author">{{ site.social.name }}</a>
         {% else %}
-          <span>{{ site.social.name }}</span>.
+          <span class="copyright-author">{{ site.social.name }}</span>
         {% endif %}
 
         {% if site.data.locales[include.lang].copyright.brief %}
-          <span class="copyright-detail d-none d-md-inline">
-            {{- site.data.locales[include.lang].copyright.brief -}}
-          </span>
+          <span class="copyright-divider">·</span>
+          <span class="copyright-detail">{{ site.data.locales[include.lang].copyright.brief }}</span>
         {% endif %}
       </p>
     </div>
@@ -28,7 +27,7 @@
     <div class="footer-right">
       <p class="powered-by mb-0">
         {%- capture _platform -%}
-          <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a>
+          <a href="https://jekyllrb.com" target="_blank" rel="noopener" class="footer-link">Jekyll</a>
         {%- endcapture -%}
 
         {%- capture _theme -%}
@@ -39,6 +38,7 @@
             href="https://github.com/cotes2020/jekyll-theme-chirpy"
             target="_blank"
             rel="noopener"
+            class="footer-link"
           >Chirpy</a>
         {%- endcapture -%}
 

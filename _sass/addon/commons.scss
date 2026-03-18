@@ -202,6 +202,88 @@ footer {
   }
 }
 
+.site-footer {
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    gap: 1rem;
+
+    @media (min-width: 768px) {
+      padding: 0 2rem;
+    }
+  }
+
+  .footer-left,
+  .footer-right {
+    text-align: center;
+
+    @media (min-width: 768px) {
+      text-align: left;
+    }
+  }
+
+  .footer-right {
+    @media (min-width: 768px) {
+      text-align: right;
+    }
+  }
+
+  .copyright {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    color: var(--text-muted-color);
+    font-size: 0.875rem;
+
+    @media (min-width: 768px) {
+      justify-content: flex-start;
+    }
+  }
+
+  .copyright-symbol {
+    margin-right: 0.125rem;
+  }
+
+  .copyright-author {
+    color: var(--text-color);
+    font-weight: 500;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--accent-primary);
+      text-decoration: none;
+    }
+  }
+
+  .copyright-divider {
+    color: var(--text-muted-color);
+    opacity: 0.5;
+    margin: 0 0.25rem;
+  }
+
+  .copyright-detail {
+    color: var(--text-muted-color);
+  }
+
+  .powered-by {
+    color: var(--text-muted-color);
+    font-size: 0.8125rem;
+  }
+
+  .footer-link {
+    color: var(--text-muted-color);
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--accent-primary);
+      text-decoration: none;
+    }
+  }
+}
+
 /* fontawesome icons */
 i {
   &.far,
@@ -709,7 +791,7 @@ $btn-mb: 0.5rem;
       font-size: 0.9rem;
     }
 
-    #mode-toggle {
+    .mode-toggle {
       @extend %button;
       @extend %sidebar-links;
       @extend %sidebar-link-hover;
