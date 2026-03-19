@@ -26,8 +26,7 @@
   justify-content: flex-start !important;
 
   @media (min-width: 1200px) {
-    position: relative;
-    padding-right: calc(280px + 2.5rem);
+    align-items: flex-start;
   }
 
   .post-main {
@@ -53,13 +52,15 @@
     @media (min-width: 1200px) {
       display: flex;
       flex-direction: column;
-      position: absolute;
-      right: 0;
-      top: 0;
+      position: sticky;
+      position: -webkit-sticky;
+      top: 5rem;
+      align-self: flex-start;
       max-width: 280px;
       min-width: 220px;
       padding-left: 0;
       margin-left: 0;
+      flex-shrink: 0;
     }
   }
 }
@@ -477,12 +478,9 @@
   background: var(--card-bg, var(--main-bg));
   border-left: 1px solid var(--main-border-color);
   border-radius: $radius-sm;
-  position: -webkit-sticky;
-  position: sticky;
-  top: 5rem;
   max-width: 260px;
   padding: $space-md $space-md $space-md $space-lg;
-  transition: top 0.2s ease-in-out, box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease;
   -webkit-animation: fade-up 0.8s;
   animation: fade-up 0.8s;
 
