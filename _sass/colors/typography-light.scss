@@ -1,17 +1,17 @@
 /*
  * The syntax light mode typography colors
- * Clean white palette - editorial style
+ * Bold Editorial - dramatic light palette
  */
 
 @mixin light-scheme {
   /* Framework color */
-  --main-bg: #ffffff;
-  --mask-bg: rgba(0, 0, 0, 0.3);
-  --main-border-color: #e5e5e5;
+  --main-bg: #fafafa;
+  --mask-bg: rgba(0, 0, 0, 0.4);
+  --main-border-color: #e8e8e8;
 
-  /* Common color - clean neutrals */
-  --text-color: #171717;
-  --text-muted-color: #525252;
+  /* Common color - warm neutrals */
+  --text-color: #1a1a1a;
+  --text-muted-color: #5c5c5c;
   --text-muted-highlight-color: #1a7f37;
   --heading-color: #0a0a0a;
   --label-color: #404040;
@@ -20,15 +20,15 @@
   --link-color: #1a7f37;
   --link-underline-color: #d4d4d4;
   --button-bg: #ffffff;
-  --btn-border-color: #e5e5e5;
+  --btn-border-color: #e0e0e0;
   --btn-backtotop-color: #525252;
-  --btn-backtotop-border-color: #e5e5e5;
+  --btn-backtotop-border-color: #e0e0e0;
   --checkbox-color: #a3a3a3;
   --checkbox-checked-color: #1a7f37;
   --img-bg: radial-gradient(
     circle,
     rgb(255, 255, 255) 0%,
-    rgb(250, 250, 250) 100%
+    rgb(248, 248, 248) 100%
   );
   --shimmer-bg: linear-gradient(
     90deg,
@@ -37,84 +37,106 @@
     rgba(255, 255, 255, 0) 100%
   );
 
-  /* Header/Navigation */
-  --header-bg: rgba(255, 255, 255, 0.95);
-  --header-border-color: #e5e5e5;
-  --nav-link-color: #404040;
+  /* Premium shadows - warm tinted, layered depth */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 6px 16px rgba(0, 0, 0, 0.08), 0 3px 6px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.1), 0 6px 12px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 24px 56px rgba(0, 0, 0, 0.12), 0 10px 20px rgba(0, 0, 0, 0.06);
+  --shadow-glow: 0 0 0 1px rgba(26, 127, 55, 0.1), 0 6px 20px rgba(26, 127, 55, 0.15);
+  --shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.04);
+
+  /* Glassmorphism - warm frosted glass */
+  --glass-bg: rgba(255, 255, 255, 0.9);
+  --glass-border: rgba(0, 0, 0, 0.05);
+  --glass-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+
+  /* Header/Navigation - branded statement */
+  --header-bg: rgba(255, 255, 255, 0.92);
+  --header-border-color: rgba(0, 0, 0, 0.04);
+  --nav-link-color: #5c5c5c;
   --nav-link-hover-color: #1a7f37;
+  --nav-active-bg: rgba(26, 127, 55, 0.08);
+  --nav-active-border: rgba(26, 127, 55, 0.15);
+  --topbar-accent: linear-gradient(90deg, #1a7f37 0%, #238636 100%);
 
   /* Sidebar - minimal, for mobile */
   --site-title-color: #0a0a0a;
   --site-subtitle-color: #525252;
   --sidebar-bg: #ffffff;
-  --sidebar-border-color: #e5e5e5;
+  --sidebar-border-color: #e8e8e8;
   --sidebar-muted-color: #525252;
   --sidebar-active-color: #0a0a0a;
-  --sidebar-hover-bg: rgba(26, 127, 55, 0.08);
+  --sidebar-hover-bg: rgba(26, 127, 55, 0.06);
   --sidebar-btn-bg: #ffffff;
   --sidebar-btn-color: #525252;
   --avatar-border-color: #d4d4d4;
 
   /* Topbar */
-  --topbar-bg: rgba(255, 255, 255, 0.95);
-  --topbar-text-color: #171717;
-  --search-border-color: #e5e5e5;
+  --topbar-bg: rgba(255, 255, 255, 0.92);
+  --topbar-text-color: #1a1a1a;
+  --search-border-color: #e0e0e0;
   --search-icon-color: #737373;
   --input-focus-border-color: #1a7f37;
 
-  /* Home page */
+  /* Home page - dramatic atmospheric */
   --post-list-text-color: #404040;
   --btn-patinator-text-color: #404040;
   --btn-paginator-hover-color: rgba(26, 127, 55, 0.1);
-  --hero-bg: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+  --hero-bg: linear-gradient(135deg, #ffffff 0%, #f8faf8 40%, #f0f5f0 100%);
+  --hero-accent-bg: rgba(26, 127, 55, 0.04);
+  --hero-gradient-start: #ffffff;
+  --hero-gradient-end: #f0f5f0;
   --featured-card-bg: #ffffff;
-  --featured-card-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  --featured-card-shadow: 0 6px 24px rgba(0, 0, 0, 0.06), 0 2px 4px rgba(0, 0, 0, 0.03);
+  --featured-card-hover-shadow: 0 16px 48px rgba(0, 0, 0, 0.1), 0 6px 12px rgba(0, 0, 0, 0.05);
 
   /* Posts */
   --toc-highlight: #1a7f37;
-  --toc-popup-border-color: #e5e5e5;
+  --toc-popup-border-color: #e8e8e8;
   --btn-share-color: #525252;
   --btn-share-hover-color: #1a7f37;
   --card-bg: #ffffff;
   --card-hovor-bg: #fafafa;
-  --card-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
-  --footnote-target-bg: rgba(26, 127, 55, 0.12);
+  --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --card-hover-shadow: 0 8px 24px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.03);
+  --footnote-target-bg: rgba(26, 127, 55, 0.1);
   --tb-odd-bg: #fefefe;
-  --tb-border-color: #e5e5e5;
+  --tb-border-color: #e8e8e8;
   --dash-color: #d4d4d4;
   --kbd-wrap-color: #d4d4d4;
   --kbd-text-color: var(--text-color);
   --kbd-bg-color: #ffffff;
-  --prompt-text-color: rgba(23, 23, 23, 0.85);
-  --prompt-tip-bg: rgba(76, 175, 80, 0.1);
+  --prompt-text-color: rgba(26, 26, 26, 0.85);
+  --prompt-tip-bg: rgba(76, 175, 80, 0.08);
   --prompt-tip-icon-color: #4caf50;
-  --prompt-info-bg: rgba(33, 150, 243, 0.08);
+  --prompt-info-bg: rgba(33, 150, 243, 0.06);
   --prompt-info-icon-color: #2196f3;
-  --prompt-warning-bg: rgba(255, 152, 0, 0.1);
+  --prompt-warning-bg: rgba(255, 152, 0, 0.08);
   --prompt-warning-icon-color: #ff9800;
-  --prompt-danger-bg: rgba(244, 67, 54, 0.08);
+  --prompt-danger-bg: rgba(244, 67, 54, 0.06);
   --prompt-danger-icon-color: #f44336;
 
   /* Tags */
-  --tag-border: #e5e5e5;
+  --tag-border: #e0e0e0;
   --tag-shadow: var(--btn-border-color);
-  --tag-hover: rgba(26, 127, 55, 0.1);
-  --tag-bg: #fafafa;
-  --search-tag-bg: #fafafa;
+  --tag-hover: rgba(26, 127, 55, 0.08);
+  --tag-bg: #f8f8f8;
+  --search-tag-bg: #f8f8f8;
 
   /* Categories */
-  --categories-border: rgba(0, 0, 0, 0.08);
-  --categories-hover-bg: rgba(26, 127, 55, 0.08);
+  --categories-border: rgba(0, 0, 0, 0.06);
+  --categories-hover-bg: rgba(26, 127, 55, 0.06);
   --categories-icon-hover-color: #1a7f37;
 
   /* Archive */
-  --timeline-color: rgba(0, 0, 0, 0.06);
+  --timeline-color: rgba(0, 0, 0, 0.05);
   --timeline-node-bg: #1a7f37;
   --timeline-year-dot-color: #ffffff;
 
-  /* Accent colors */
+  /* Accent colors - bold green */
   --accent-primary: #1a7f37;
-  --accent-primary-light: rgba(26, 127, 55, 0.1);
+  --accent-primary-light: rgba(26, 127, 55, 0.08);
+  --accent-primary-lighter: rgba(26, 127, 55, 0.04);
   --accent-secondary: #2ea043;
   --accent-tertiary: #238636;
 
@@ -125,4 +147,4 @@
   .dark {
     display: none;
   }
-} /* light-scheme */
+}
