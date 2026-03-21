@@ -48,29 +48,47 @@ refactor: true
 {% endif %}
 
 <div class="home-wrapper" data-testid="home-wrapper">
+  <!-- Asymmetric Hero with Editorial Impact -->
   <section class="hero-section" data-testid="hero-section">
+    <div class="hero-backdrop" aria-hidden="true"></div>
     <div class="hero-content">
-      <p class="hero-eyebrow">{{ site.data.locales[lang].home.hero_eyebrow | default: 'Notes on systems, security, and engineering craft' }}</p>
-      <h1 class="hero-title">{{ site.title }}</h1>
-      <p class="hero-tagline">{{ site.tagline }}</p>
+      <div class="hero-text">
+        <span class="hero-eyebrow">{{ site.data.locales[lang].home.hero_eyebrow | default: 'Notes on systems, security, and engineering craft' }}</span>
+        <h1 class="hero-title">{{ site.title }}</h1>
+        <p class="hero-tagline">{{ site.tagline }}</p>
+      </div>
       <div class="hero-actions">
-        <a href="#recent-posts" class="hero-link hero-link-primary">{{ site.data.locales[lang].home.browse_recent | default: 'Browse recent posts' }}</a>
+        <a href="#recent-posts" class="hero-link hero-link-primary">
+          <span>{{ site.data.locales[lang].home.browse_recent | default: 'Browse recent' }}</span>
+          <i class="fas fa-arrow-down" aria-hidden="true"></i>
+        </a>
         {% if site.categories.size > 0 %}
-          <a href="{{ '/categories/' | relative_url }}" class="hero-link">{{ site.data.locales[lang].home.explore_categories | default: 'Explore categories' }}</a>
+          <a href="{{ '/categories/' | relative_url }}" class="hero-link hero-link-secondary">
+            <span>{{ site.data.locales[lang].home.explore_categories | default: 'Explore categories' }}</span>
+          </a>
         {% endif %}
       </div>
+    </div>
+    <div class="hero-decoration" aria-hidden="true">
+      <div class="hero-line hero-line-1"></div>
+      <div class="hero-line hero-line-2"></div>
+      <div class="hero-line hero-line-3"></div>
     </div>
   </section>
 
   {% if all_pinned.size > 0 and paginator.page == 1 %}
+  <!-- Featured Posts with Magazine-Style Framing -->
   <section class="featured-section" data-testid="featured-section">
-    <h2 class="section-title">
-      <span class="section-icon"><i class="fas fa-thumbtack"></i></span>
-      {{ site.data.locales[lang].home.featured | default: 'Featured' }}
-    </h2>
+    <header class="section-header">
+      <div class="section-label">
+        <span class="section-icon"><i class="fas fa-thumbtack" aria-hidden="true"></i></span>
+        <h2 class="section-title">{{ site.data.locales[lang].home.featured | default: 'Featured' }}</h2>
+      </div>
+      <span class="section-count">{{ all_pinned.size }}</span>
+    </header>
     <div class="featured-grid">
       {% for post in all_pinned limit: 3 %}
-        <article class="featured-card" data-testid="featured-post-{{ forloop.index }}">
+        <article class="featured-card{% if forloop.first %} featured-card-lead{% endif %}" data-testid="featured-post-{{ forloop.index }}">
           <a href="{{ post.url | relative_url }}" class="featured-link">
             {% if post.image %}
               {% assign image_src = post.image.path | default: post.image %}
@@ -78,17 +96,22 @@ refactor: true
               {% assign alt = post.image.alt | xml_escape | default: 'Preview Image' %}
               <div class="featured-image">
                 <img src="{{ src | strip }}" alt="{{ alt }}" loading="lazy">
+                <div class="featured-image-overlay" aria-hidden="true"></div>
+              </div>
+            {% else %}
+              <div class="featured-image featured-image-placeholder" aria-hidden="true">
+                <i class="fas fa-file-alt"></i>
               </div>
             {% endif %}
             <div class="featured-body">
+              {% if post.categories.size > 0 %}
+                <span class="featured-category">{{ post.categories | first }}</span>
+              {% endif %}
               <h3 class="featured-title">{{ post.title }}</h3>
               <div class="featured-meta">
                 <time datetime="{{ post.date | date_to_xmlschema }}">
                   {% include datetime.html date=post.date lang=lang %}
                 </time>
-                {% if post.categories.size > 0 %}
-                  <span class="featured-category">{{ post.categories | first }}</span>
-                {% endif %}
               </div>
             </div>
           </a>
@@ -118,11 +141,15 @@ refactor: true
 {% assign category_count = top_categories | size %}
 
   {% if category_count > 0 %}
+  <!-- Categories with Distinctive Card Treatment -->
   <section class="categories-section" data-testid="categories-section">
-    <h2 class="section-title">
-      <span class="section-icon"><i class="fas fa-layer-group"></i></span>
-      {{ site.data.locales[lang].tabs.categories | default: "Categories" }}
-    </h2>
+    <header class="section-header">
+      <div class="section-label">
+        <span class="section-icon"><i class="fas fa-layer-group" aria-hidden="true"></i></span>
+        <h2 class="section-title">{{ site.data.locales[lang].tabs.categories | default: "Categories" }}</h2>
+      </div>
+      <span class="section-count">{{ category_count }}</span>
+    </header>
     <div class="categories-grid">
       {% for category in top_categories limit: 6 %}
         {% assign category_name = category | first %}
@@ -142,36 +169,20 @@ refactor: true
         {% assign sub_categories = sub_categories | sort %}
         
         <a href="{{ _category_url | relative_url }}" class="category-card" data-testid="category-{{ category_name | slugify }}">
-          <div class="category-icon">
-            <i class="far fa-folder{% if sub_categories_size > 0 %}-open{% endif %}"></i>
-          </div>
-          <div class="category-info">
-            <span class="category-name">{{ category_name }}</span>
-            <span class="category-count">
-              {% if sub_categories_size > 0 %}
-                {{ sub_categories_size }}
-              {% if sub_categories_size > 1 %}
-                  {{
-                    site.data.locales[lang].categories.category_measure.plural
-                    | default: site.data.locales[lang].categories.category_measure
-                    | default: 'categories'
-                  }}
-                {% else %}
-                  {{
-                    site.data.locales[lang].categories.category_measure.singular
-                    | default: site.data.locales[lang].categories.category_measure
-                    | default: 'category'
-                  }}
-                {% endif -%}
-                ,
-              {% endif %}
-              {{ posts_of_category | size }}
-              {% if posts_of_category.size > 1 %}
-                {{ site.data.locales[lang].categories.post_measure.plural | default: 'posts' }}
-              {% else %}
-                {{ site.data.locales[lang].categories.post_measure.singular | default: 'post' }}
-              {% endif %}
-            </span>
+          <div class="category-card-inner">
+            <div class="category-icon">
+              <i class="far fa-folder{% if sub_categories_size > 0 %}-open{% endif %}" aria-hidden="true"></i>
+            </div>
+            <div class="category-info">
+              <span class="category-name">{{ category_name }}</span>
+              <span class="category-meta">
+                <span class="category-count">{{ posts_of_category | size }}</span>
+                <span class="category-label">{% if posts_of_category.size > 1 %}{{ site.data.locales[lang].categories.post_measure.plural | default: 'posts' }}{% else %}{{ site.data.locales[lang].categories.post_measure.singular | default: 'post' }}{% endif %}</span>
+              </span>
+            </div>
+            <div class="category-arrow" aria-hidden="true">
+              <i class="fas fa-arrow-right"></i>
+            </div>
           </div>
         </a>
       {% endfor %}
@@ -180,18 +191,21 @@ refactor: true
     <div class="categories-cta">
       <a href="{{ '/categories/' | relative_url }}" class="categories-link">
         <span>{{ site.data.locales[lang].home.view_all_categories | default: 'View all categories' }}</span>
-        <i class="fas fa-arrow-right"></i>
+        <i class="fas fa-arrow-right" aria-hidden="true"></i>
       </a>
     </div>
     {% endif %}
   </section>
   {% endif %}
 
+  <!-- Recent Posts with Stronger Visual Rhythm -->
   <section id="recent-posts" class="posts-section" data-testid="posts-section">
-    <h2 class="section-title">
-      <span class="section-icon"><i class="fas fa-clock"></i></span>
-      {{ site.data.locales[lang].home.recent | default: 'Recent' }}
-    </h2>
+    <header class="section-header">
+      <div class="section-label">
+        <span class="section-icon"><i class="fas fa-clock" aria-hidden="true"></i></span>
+        <h2 class="section-title">{{ site.data.locales[lang].home.recent | default: 'Recent' }}</h2>
+      </div>
+    </header>
     <div id="post-list" class="post-list">
       {% for post in posts %}
         {% assign post_card_classes = 'post-card' %}
@@ -212,27 +226,23 @@ refactor: true
               </div>
             {% endif %}
             <div class="post-body">
+              <div class="post-header">
+                {% if post.categories.size > 0 %}
+                  <span class="post-category-badge">{{ post.categories | first }}</span>
+                {% endif %}
+                <time class="post-date" datetime="{{ post.date | date_to_xmlschema }}">
+                  {% include datetime.html date=post.date lang=lang %}
+                </time>
+              </div>
               <h2 class="post-title">{{ post.title }}</h2>
               <div class="post-excerpt">
                 <p>{% include post-description.html %}</p>
               </div>
-              <div class="post-meta">
-                <time datetime="{{ post.date | date_to_xmlschema }}">
-                  <i class="far fa-calendar fa-fw me-1"></i>
-                  {% include datetime.html date=post.date lang=lang %}
-                </time>
-                {% if post.categories.size > 0 %}
-                  <span class="post-category">
-                    <i class="far fa-folder-open fa-fw me-1"></i>
-                    {{ post.categories | first }}
-                  </span>
-                {% endif %}
-                {% if post.pin %}
-                  <span class="post-pin">
-                    <i class="fas fa-thumbtack fa-fw"></i>
-                  </span>
-                {% endif %}
-              </div>
+              {% if post.pin %}
+                <span class="post-pin-badge" aria-label="Pinned">
+                  <i class="fas fa-thumbtack" aria-hidden="true"></i>
+                </span>
+              {% endif %}
             </div>
           </a>
         </article>

@@ -1,19 +1,19 @@
 /*
  * The SCSS variables
- * Editorial redesign - warm, refined aesthetic
+ * Bold Editorial Redesign - dramatic visual identity
  */
 
 /* Layout - Top-header instead of dominant sidebar */
 
-$sidebar-width: 0px !default; /* Hidden by default - using top nav */
+$sidebar-width: 0px !default;
 $sidebar-width-large: 0px !default;
 $sb-btn-gap: 0.8rem !default;
 $sb-btn-gap-lg: 1rem !default;
 
-/* other framework sizes */
+/* Framework sizes */
 
-$topbar-height: 4rem !default;
-$header-height: 4rem !default;
+$topbar-height: 4.5rem !default;
+$header-height: 4.5rem !default;
 $search-max-width: 280px !default;
 $footer-height: 3.5rem !default;
 $footer-height-large: 4rem !default;
@@ -21,9 +21,12 @@ $main-content-max-width: 720px !default;
 $content-max-width: 720px !default;
 $radius-sm: 6px !default;
 $radius-lg: 12px !default;
+$radius-xl: 20px !default;
+$radius-2xl: 32px !default;
+$radius-full: 9999px !default;
 $back2top-size: 2.5rem !default;
 
-/* syntax highlight */
+/* Syntax highlight */
 
 $code-font-size: 0.9rem !default;
 $code-header-height: 2.5rem !default;
@@ -31,13 +34,13 @@ $code-dot-size: 0.75rem !default;
 $code-dot-gap: 0.5rem !default;
 $code-icon-width: 1.75rem !default;
 
-/* fonts - Editorial feel */
+/* Fonts - Bold Editorial */
 
 $font-family-base: 'Source Sans 3', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !default;
 $font-family-heading: 'Playfair Display', Georgia, 'Times New Roman', serif !default;
 $font-family-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace !default;
 
-/* Spacing scale */
+/* Spacing scale - generous for drama */
 
 $space-xs: 0.25rem !default;
 $space-sm: 0.5rem !default;
@@ -46,9 +49,11 @@ $space-lg: 1.5rem !default;
 $space-xl: 2rem !default;
 $space-2xl: 3rem !default;
 $space-3xl: 4rem !default;
+$space-4xl: 6rem !default;
 
-/* Typography scale */
+/* Typography scale - dramatic hierarchy */
 
+$type-scale-xs: 0.75rem !default;
 $type-scale-sm: 0.875rem !default;
 $type-scale-base: 1rem !default;
 $type-scale-lg: 1.125rem !default;
@@ -56,3 +61,25 @@ $type-scale-xl: 1.25rem !default;
 $type-scale-2xl: 1.5rem !default;
 $type-scale-3xl: 2rem !default;
 $type-scale-4xl: 2.5rem !default;
+$type-scale-5xl: 3.5rem !default;
+$type-scale-6xl: 4.5rem !default;
+
+/* Premium transitions - weighted, tactile */
+
+$transition-fast: 0.12s cubic-bezier(0.4, 0, 0.2, 1) !default;
+$transition-base: 0.18s cubic-bezier(0.16, 1, 0.3, 1) !default;
+$transition-smooth: 0.28s cubic-bezier(0.16, 1, 0.3, 1) !default;
+$transition-slow: 0.4s cubic-bezier(0.16, 1, 0.3, 1) !default;
+$transition-spring: 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) !default;
+$transition-bounce: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) !default;
+
+/* Z-index scale */
+
+$z-base: 1 !default;
+$z-dropdown: 10 !default;
+$z-sticky: 50 !default;
+$z-fixed: 100 !default;
+$z-modal-backdrop: 150 !default;
+$z-modal: 200 !default;
+$z-popover: 250 !default;
+$z-tooltip: 300 !default;

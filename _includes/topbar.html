@@ -1,19 +1,24 @@
-<!-- The Top Bar - Editorial Header -->
+<!-- The Top Bar - Branded Editorial Header -->
 
 <header id="topbar-wrapper" aria-label="Site Header" data-testid="site-header">
+  <div class="topbar-accent" aria-hidden="true"></div>
   <div id="topbar" class="d-flex align-items-center justify-content-between h-100">
-    <!-- Site Branding -->
+    <!-- Site Branding - Prominent Identity -->
     <a href="{{ '/' | relative_url }}" class="site-branding d-flex align-items-center text-decoration-none" data-testid="site-brand">
       {%- if site.avatar != empty and site.avatar -%}
         {%- capture avatar_url -%}
           {% include media-url.html src=site.avatar %}
         {%- endcapture -%}
-        <img src="{{- avatar_url -}}" width="32" height="32" alt="{{ site.title }} avatar" class="site-avatar rounded-circle">
+        <div class="brand-avatar">
+          <img src="{{- avatar_url -}}" width="36" height="36" alt="{{ site.title }} avatar" class="site-avatar rounded-circle">
+        </div>
       {%- endif -%}
-      <span class="site-name">{{ site.title }}</span>
+      <div class="brand-text">
+        <span class="site-name">{{ site.title }}</span>
+      </div>
     </a>
 
-    <!-- Navigation -->
+    <!-- Navigation - Clean Horizontal Nav -->
     <nav id="main-nav" class="d-none d-lg-flex align-items-center" aria-label="Main Navigation" data-testid="main-nav">
       <ul class="nav-list d-flex list-unstyled mb-0">
         <!-- home -->
@@ -36,7 +41,7 @@
 
     <div id="topbar-title">{{ page.title | default: site.title }}</div>
 
-    <!-- Right Actions -->
+    <!-- Right Actions - Grouped Controls -->
     <div class="header-actions d-flex align-items-center">
       <!-- Search -->
       <button type="button" id="search-trigger" class="btn btn-link header-btn" aria-label="Search">
