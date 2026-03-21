@@ -21,19 +21,19 @@ If this is your first visit, pick one path and follow it for a few posts instead
 
 ### Operating system path
 
-Start with [Operating System(1-1): Interrupt, Organization, Architecture]({% link _posts/2025-03-04-OS(1-1).md %}), then continue to [Operating System(1-2): Operation, Resource Management, Virtualization]({% link _posts/2025-03-08-OS(1-2).md %}). If you want a practical bridge after the theory, go to [Operating System Practice(1): Kernel Build]({% link _posts/2025-03-09-OS(prac_1).md %}).
+Start with [Operating System(1-1): Interrupt, Organization, Architecture]({% link _posts/os/2025-03-04-OS(1-1).md %}), then continue to [Operating System(1-2): Operation, Resource Management, Virtualization]({% link _posts/os/2025-03-08-OS(1-2).md %}). If you want a practical bridge after the theory, go to [Operating System Practice(1): Kernel Build]({% link _posts/os/2025-03-09-OS(prac_1).md %}).
 
 ### Computer architecture path
 
-Start with [Chapter 1-1: MIPS]({% link _posts/2025-03-11-CA(1-1).md %}) and then move to [Chapter 1-2: MIPS(MAPS)]({% link _posts/2025-03-18-CA(1-2).md %}). This path is a good fit if you want to understand how software maps down to instructions, registers, and machine behavior.
+Start with [Chapter 1-1: MIPS]({% link _posts/ca/2025-03-11-CA(1-1).md %}) and then move to [Chapter 1-2: MIPS(MAPS)]({% link _posts/ca/2025-03-18-CA(1-2).md %}). This path is a good fit if you want to understand how software maps down to instructions, registers, and machine behavior.
 
 ### Networking path
 
-Start with [Computer Networking(1): Intro]({% link _posts/2025-03-10-CN(1).md %}) and then [Computer Networking: Application layer(1) - socket, HTTP, cache]({% link _posts/2025-03-11-CN(2).md %}). If you want to go deeper into protocol details after that, continue with [Internet Protocol(1) - ARP]({% link _posts/2025-09-01-CN+(1).md %}).
+Start with [Computer Networking(1): Intro]({% link _posts/cn/2025-03-10-CN(1).md %}) and then [Computer Networking: Application layer(1) - socket, HTTP, cache]({% link _posts/cn/2025-03-11-CN(2).md %}). If you want to go deeper into protocol details after that, continue with [Internet Protocol(1) - ARP]({% link _posts/cn-plus/2025-09-01-CN+(1).md %}).
 
 ### Security path
 
-Begin with [Secure Coding(1-1) - SW개발보안 이해]({% link _posts/2025-09-05-SC(1).md %}), then continue to [Secure Coding(1-2) - SW개발보안 국내기준]({% link _posts/2025-09-05-SC(1-2).md %}) and [Secure Coding(1-3) - SW개발보안 국외기준]({% link _posts/2025-09-05-SC(1-3).md %}). That path covers both the conceptual security baseline and the development-focused track that the later posts build on.
+Begin with [Secure Coding(1-1) - SW개발보안 이해]({% link _posts/sc/2025-09-05-SC(1).md %}), then continue to [Secure Coding(1-2) - SW개발보안 국내기준]({% link _posts/sc/2025-09-05-SC(1-2).md %}) and [Secure Coding(1-3) - SW개발보안 국외기준]({% link _posts/sc/2025-09-05-SC(1-3).md %}). That path covers both the conceptual security baseline and the development-focused track that the later posts build on.
 
 ## Who this blog is for
 
