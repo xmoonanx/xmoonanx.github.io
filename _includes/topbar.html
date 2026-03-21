@@ -1,16 +1,16 @@
-<!-- The Top Bar - Branded Editorial Header -->
+<!-- The Masthead - Refined Archive Header -->
 
 <header id="topbar-wrapper" aria-label="Site Header" data-testid="site-header">
   <div class="topbar-accent" aria-hidden="true"></div>
   <div id="topbar" class="d-flex align-items-center justify-content-between h-100">
-    <!-- Site Branding - Prominent Identity -->
+    <!-- Site Branding - Archive Identity -->
     <a href="{{ '/' | relative_url }}" class="site-branding d-flex align-items-center text-decoration-none" data-testid="site-brand">
       {%- if site.avatar != empty and site.avatar -%}
         {%- capture avatar_url -%}
           {% include media-url.html src=site.avatar %}
         {%- endcapture -%}
         <div class="brand-avatar">
-          <img src="{{- avatar_url -}}" width="36" height="36" alt="{{ site.title }} avatar" class="site-avatar rounded-circle">
+          <img src="{{- avatar_url -}}" width="32" height="32" alt="{{ site.title }} avatar" class="site-avatar rounded-circle">
         </div>
       {%- endif -%}
       <div class="brand-text">
@@ -18,7 +18,7 @@
       </div>
     </a>
 
-    <!-- Navigation - Clean Horizontal Nav -->
+    <!-- Navigation - Refined Horizontal Nav -->
     <nav id="main-nav" class="d-none d-lg-flex align-items-center" aria-label="Main Navigation" data-testid="main-nav">
       <ul class="nav-list d-flex list-unstyled mb-0">
         <!-- home -->

@@ -1,6 +1,6 @@
 /*
  * The SCSS variables
- * Bold Editorial Redesign - dramatic visual identity
+ * Premium Archive Redesign - refined, luxurious visual identity
  */
 
 /* Layout - Top-header instead of dominant sidebar */
@@ -20,9 +20,9 @@ $footer-height-large: 4rem !default;
 $main-content-max-width: 720px !default;
 $content-max-width: 720px !default;
 $radius-sm: 6px !default;
-$radius-lg: 12px !default;
-$radius-xl: 20px !default;
-$radius-2xl: 32px !default;
+$radius-lg: 10px !default;
+$radius-xl: 16px !default;
+$radius-2xl: 24px !default;
 $radius-full: 9999px !default;
 $back2top-size: 2.5rem !default;
 
@@ -34,13 +34,13 @@ $code-dot-size: 0.75rem !default;
 $code-dot-gap: 0.5rem !default;
 $code-icon-width: 1.75rem !default;
 
-/* Fonts - Bold Editorial */
+/* Fonts - Premium Archive Editorial */
 
 $font-family-base: 'Source Sans 3', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !default;
 $font-family-heading: 'Playfair Display', Georgia, 'Times New Roman', serif !default;
 $font-family-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace !default;
 
-/* Spacing scale - generous for drama */
+/* Spacing scale - generous for archive presence */
 
 $space-xs: 0.25rem !default;
 $space-sm: 0.5rem !default;
@@ -51,7 +51,7 @@ $space-2xl: 3rem !default;
 $space-3xl: 4rem !default;
 $space-4xl: 6rem !default;
 
-/* Typography scale - dramatic hierarchy */
+/* Typography scale - formal editorial hierarchy */
 
 $type-scale-xs: 0.75rem !default;
 $type-scale-sm: 0.875rem !default;
@@ -66,12 +66,12 @@ $type-scale-6xl: 4.5rem !default;
 
 /* Premium transitions - weighted, tactile */
 
-$transition-fast: 0.12s cubic-bezier(0.4, 0, 0.2, 1) !default;
-$transition-base: 0.18s cubic-bezier(0.16, 1, 0.3, 1) !default;
-$transition-smooth: 0.28s cubic-bezier(0.16, 1, 0.3, 1) !default;
-$transition-slow: 0.4s cubic-bezier(0.16, 1, 0.3, 1) !default;
-$transition-spring: 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) !default;
-$transition-bounce: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) !default;
+$transition-fast: 0.1s cubic-bezier(0.4, 0, 0.2, 1) !default;
+$transition-base: 0.16s cubic-bezier(0.16, 1, 0.3, 1) !default;
+$transition-smooth: 0.24s cubic-bezier(0.16, 1, 0.3, 1) !default;
+$transition-slow: 0.36s cubic-bezier(0.16, 1, 0.3, 1) !default;
+$transition-spring: 0.32s cubic-bezier(0.34, 1.56, 0.64, 1) !default;
+$transition-bounce: 0.45s cubic-bezier(0.68, -0.55, 0.265, 1.55) !default;
 
 /* Z-index scale */
 

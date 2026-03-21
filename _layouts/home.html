@@ -77,14 +77,13 @@ refactor: true
   </section>
 
   {% if all_pinned.size > 0 and paginator.page == 1 %}
-  <!-- Featured Posts with Magazine-Style Framing -->
   <section class="featured-section" data-testid="featured-section">
     <header class="section-header">
       <div class="section-label">
-        <span class="section-icon"><i class="fas fa-thumbtack" aria-hidden="true"></i></span>
-        <h2 class="section-title">{{ site.data.locales[lang].home.featured | default: 'Featured' }}</h2>
+        <span class="section-icon"><i class="fas fa-bookmark" aria-hidden="true"></i></span>
+        <h2 class="section-title">Selected notes</h2>
       </div>
-      <span class="section-count">{{ all_pinned.size }}</span>
+      <span class="section-count">editor's pick</span>
     </header>
     <div class="featured-grid">
       {% for post in all_pinned limit: 3 %}
@@ -141,14 +140,13 @@ refactor: true
 {% assign category_count = top_categories | size %}
 
   {% if category_count > 0 %}
-  <!-- Categories with Distinctive Card Treatment -->
   <section class="categories-section" data-testid="categories-section">
     <header class="section-header">
       <div class="section-label">
         <span class="section-icon"><i class="fas fa-layer-group" aria-hidden="true"></i></span>
-        <h2 class="section-title">{{ site.data.locales[lang].tabs.categories | default: "Categories" }}</h2>
+        <h2 class="section-title">Collections</h2>
       </div>
-      <span class="section-count">{{ category_count }}</span>
+      <span class="section-count">indexed</span>
     </header>
     <div class="categories-grid">
       {% for category in top_categories limit: 6 %}
@@ -177,7 +175,7 @@ refactor: true
               <span class="category-name">{{ category_name }}</span>
               <span class="category-meta">
                 <span class="category-count">{{ posts_of_category | size }}</span>
-                <span class="category-label">{% if posts_of_category.size > 1 %}{{ site.data.locales[lang].categories.post_measure.plural | default: 'posts' }}{% else %}{{ site.data.locales[lang].categories.post_measure.singular | default: 'post' }}{% endif %}</span>
+                <span class="category-label">{% if posts_of_category.size > 1 %}notes{% else %}note{% endif %}</span>
               </span>
             </div>
             <div class="category-arrow" aria-hidden="true">
@@ -190,20 +188,19 @@ refactor: true
     {% if category_count > 6 %}
     <div class="categories-cta">
       <a href="{{ '/categories/' | relative_url }}" class="categories-link">
-        <span>{{ site.data.locales[lang].home.view_all_categories | default: 'View all categories' }}</span>
-        <i class="fas fa-arrow-right" aria-hidden="true"></i>
-      </a>
-    </div>
+          <span>Browse full index</span>
+          <i class="fas fa-arrow-right" aria-hidden="true"></i>
+        </a>
+      </div>
     {% endif %}
   </section>
   {% endif %}
 
-  <!-- Recent Posts with Stronger Visual Rhythm -->
   <section id="recent-posts" class="posts-section" data-testid="posts-section">
     <header class="section-header">
       <div class="section-label">
         <span class="section-icon"><i class="fas fa-clock" aria-hidden="true"></i></span>
-        <h2 class="section-title">{{ site.data.locales[lang].home.recent | default: 'Recent' }}</h2>
+        <h2 class="section-title">Latest additions</h2>
       </div>
     </header>
     <div id="post-list" class="post-list">
