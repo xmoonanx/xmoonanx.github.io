@@ -33,7 +33,7 @@ Start with [Computer Networking(1): Intro]({% link _posts/2025-03-10-CN(1).md %}
 
 ### Security path
 
-If you want the conceptual side first, begin with [Basic Concepts of Cybersecurity(1) - CIA+AN]({% link _posts/2025-09-05-Security(1).md %}) and [Basic Concepts of Cybersecurity(2)]({% link _posts/2025-09-12-Security(2).md %}). If you want the software-development angle, begin with [Secure Coding(1-1) - SW개발보안 이해]({% link _posts/2025-09-05-SC(1).md %}).
+Begin with [Secure Coding(1-1) - SW개발보안 이해]({% link _posts/2025-09-05-SC(1).md %}), then continue to [Secure Coding(1-2) - SW개발보안 국내기준]({% link _posts/2025-09-05-SC(1-2).md %}) and [Secure Coding(1-3) - SW개발보안 국외기준]({% link _posts/2025-09-05-SC(1-3).md %}). That path covers both the conceptual security baseline and the development-focused track that the later posts build on.
 
 ## Who this blog is for
 
