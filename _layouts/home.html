@@ -206,9 +206,6 @@ refactor: true
     <div id="post-list" class="post-list">
       {% for post in posts %}
         {% assign post_card_classes = 'post-card' %}
-        {% if forloop.first and paginator.page == 1 and post.image %}
-          {% assign post_card_classes = post_card_classes | append: ' post-card-lead' %}
-        {% endif %}
         {% unless post.image %}
           {% assign post_card_classes = post_card_classes | append: ' post-card-text-only' %}
         {% endunless %}
