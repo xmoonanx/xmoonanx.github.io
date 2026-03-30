@@ -81,9 +81,9 @@ refactor: true
     <header class="section-header">
       <div class="section-label">
         <span class="section-icon"><i class="fas fa-bookmark" aria-hidden="true"></i></span>
-        <h2 class="section-title">Selected notes</h2>
+        <h2 class="section-title">추천 글</h2>
       </div>
-      <span class="section-count">editor's pick</span>
+      <span class="section-count">먼저 읽기 좋은 글</span>
     </header>
     <div class="featured-grid">
       {% for post in all_pinned limit: 3 %}
@@ -144,9 +144,9 @@ refactor: true
     <header class="section-header">
       <div class="section-label">
         <span class="section-icon"><i class="fas fa-layer-group" aria-hidden="true"></i></span>
-        <h2 class="section-title">Collections</h2>
+        <h2 class="section-title">주제별 모음</h2>
       </div>
-      <span class="section-count">indexed</span>
+      <span class="section-count">정리된 경로</span>
     </header>
     <div class="categories-grid">
       {% for category in top_categories limit: 6 %}
@@ -175,7 +175,7 @@ refactor: true
               <span class="category-name">{{ category_name }}</span>
               <span class="category-meta">
                 <span class="category-count">{{ posts_of_category | size }}</span>
-                <span class="category-label">{% if posts_of_category.size > 1 %}notes{% else %}note{% endif %}</span>
+                <span class="category-label">글</span>
               </span>
             </div>
             <div class="category-arrow" aria-hidden="true">
@@ -188,7 +188,7 @@ refactor: true
     {% if category_count > 6 %}
     <div class="categories-cta">
       <a href="{{ '/categories/' | relative_url }}" class="categories-link">
-          <span>Browse full index</span>
+          <span>전체 카테고리 보기</span>
           <i class="fas fa-arrow-right" aria-hidden="true"></i>
         </a>
       </div>
@@ -200,7 +200,7 @@ refactor: true
     <header class="section-header">
       <div class="section-label">
         <span class="section-icon"><i class="fas fa-clock" aria-hidden="true"></i></span>
-        <h2 class="section-title">Latest additions</h2>
+        <h2 class="section-title">최신 글</h2>
       </div>
     </header>
     <div id="post-list" class="post-list">

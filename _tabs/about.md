@@ -4,52 +4,52 @@ icon: fas fa-info-circle
 order: 4
 ---
 
-This blog is a study-focused technical notebook built around a few core clusters rather than one-off posts. I use it to turn systems and security study sessions into notes that are easier to revisit, connect, and extend over time.
+이 블로그는 단발성 글보다 몇 개의 핵심 클러스터를 중심으로 이어지는 기술 학습 노트를 쌓아가는 공간입니다. 시스템, 컴퓨터구조, 네트워크, 보안 공부를 다시 찾아보고 연결해서 읽기 쉽게 정리하는 데 초점을 두고 있습니다.
 
-If you are studying computer science fundamentals, reviewing for interviews, or trying to build a more structured path through operating systems, computer architecture, networking, and security, this page is the best place to start.
+운영체제, 컴퓨터구조, 네트워크, 보안을 체계적으로 공부하고 싶거나 면접 대비용으로 핵심 개념을 다시 정리하고 있다면, 이 페이지에서 시작하는 것이 가장 빠릅니다.
 
-## Focus areas
+## 이 블로그에서 다루는 분야
 
-- **Operating system**: process management, memory, synchronization, virtualization, and hands-on kernel work
-- **Computer architecture**: MIPS, CPU behavior, memory hierarchy, and machine-level reasoning
-- **Security and secure coding**: core cybersecurity concepts, risk thinking, OWASP-style secure development, and practical defensive habits
-- **Networking and internet protocol**: network fundamentals, application-layer behavior, and protocol-level details such as ARP
+- **운영체제**: 프로세스 관리, 메모리, 동기화, 가상화, 커널 실습
+- **컴퓨터구조**: MIPS, CPU 동작, 메모리 계층 구조, 기계 수준 사고
+- **보안과 시큐어 코딩**: 핵심 보안 개념, 위험 사고방식, 안전한 개발 습관
+- **네트워크와 인터넷 프로토콜**: 네트워크 기초, 애플리케이션 계층, ARP 같은 프로토콜 디테일
 
-## Start here
+## 여기서 시작하면 좋습니다
 
-If this is your first visit, pick one path and follow it for a few posts instead of jumping around.
+처음 들어오셨다면 아카이브를 한 번에 훑기보다, 하나의 경로를 골라 몇 편 연속으로 읽는 편이 훨씬 이해가 잘 됩니다.
 
-### Operating system path
+### 운영체제 경로
 
-Start with [Operating System(1-1): Interrupt, Organization, Architecture]({% link _posts/os/2025-03-04-OS(1-1).md %}), then continue to [Operating System(1-2): Operation, Resource Management, Virtualization]({% link _posts/os/2025-03-08-OS(1-2).md %}). If you want a practical bridge after the theory, go to [Operating System Practice(1): Kernel Build]({% link _posts/os/2025-03-09-OS(prac_1).md %}).
+[인터럽트, 시스템 구조, 운영체제 아키텍처 - Operating System 1-1]({% link _posts/os/2025-03-04-OS(1-1).md %})에서 시작한 뒤, [운영체제의 동작 원리와 자원 관리 - Operating System 1-2]({% link _posts/os/2025-03-08-OS(1-2).md %})로 이어가면 기본 골격을 잡기 좋습니다. 이론 뒤에 바로 실습 감각을 붙이고 싶다면 [Operating System Practice(1): Kernel Build]({% link _posts/os/2025-03-09-OS(prac_1).md %})로 넘어가도 좋습니다.
 
-### Computer architecture path
+### 컴퓨터구조 경로
 
-Start with [Chapter 1-1: MIPS]({% link _posts/ca/2025-03-11-CA(1-1).md %}) and then move to [Chapter 1-2: MIPS(MAPS)]({% link _posts/ca/2025-03-18-CA(1-2).md %}). This path is a good fit if you want to understand how software maps down to instructions, registers, and machine behavior.
+[MIPS 기초: 명령어와 레지스터의 시작 - Computer Architecture 1-1]({% link _posts/ca/2025-03-11-CA(1-1).md %})에서 시작한 뒤, [MIPS 연산과 MARS 시뮬레이션 - Computer Architecture 1-2]({% link _posts/ca/2025-03-18-CA(1-2).md %})로 이어가면 소프트웨어가 명령어와 레지스터 수준으로 어떻게 내려가는지 감을 잡기 좋습니다.
 
-### Networking path
+### 네트워크 경로
 
-Start with [Computer Networking(1): Intro]({% link _posts/cn/2025-03-10-CN(1).md %}) and then [Computer Networking: Application layer(1) - socket, HTTP, cache]({% link _posts/cn/2025-03-11-CN(2).md %}). If you want to go deeper into protocol details after that, continue with [Internet Protocol(1) - ARP]({% link _posts/cn-plus/2025-09-01-CN+(1).md %}).
+[컴퓨터 네트워크 입문: 인터넷 구조와 패킷 전달 - Computer Networking 1]({% link _posts/cn/2025-03-10-CN(1).md %})에서 시작한 뒤, [애플리케이션 계층 기초: socket, HTTP, web cache - Computer Networking 2]({% link _posts/cn/2025-03-11-CN(2).md %})로 이어가면 전체 구조와 웹 계층의 감각을 먼저 잡을 수 있습니다. 이후 프로토콜 디테일로 더 들어가고 싶다면 [Internet Protocol(1) - ARP]({% link _posts/cn-plus/2025-09-01-CN+(1).md %})를 읽으면 됩니다.
 
-### Security path
+### 보안 경로
 
-Begin with [Secure Coding(1-1) - SW개발보안 이해]({% link _posts/sc/2025-09-05-SC(1).md %}), then continue to [Secure Coding(1-2) - SW개발보안 국내기준]({% link _posts/sc/2025-09-05-SC(1-2).md %}) and [Secure Coding(1-3) - SW개발보안 국외기준]({% link _posts/sc/2025-09-05-SC(1-3).md %}). That path covers both the conceptual security baseline and the development-focused track that the later posts build on.
+[시큐어 소프트웨어 개발의 기초 - Secure Coding 1]({% link _posts/sc/2025-09-05-SC(1).md %})에서 출발한 뒤, [Secure Coding(1-2) - Korean secure development standards]({% link _posts/sc/2025-09-05-SC(1-2).md %})와 [Secure Coding(1-3) - Global secure development standards]({% link _posts/sc/2025-09-05-SC(1-3).md %})로 이어가면 보안의 큰 그림과 개발 기준을 같이 잡을 수 있습니다.
 
-## Who this blog is for
+## 이런 분께 특히 잘 맞습니다
 
-This blog is most useful for readers who prefer connected study notes over isolated summaries.
+이 블로그는 단편 요약보다 연결된 학습 노트를 선호하는 분께 가장 잘 맞습니다.
 
-- Students who want a clearer path through core CS subjects
-- Backend or systems-focused developers reviewing fundamentals
-- Readers preparing for interviews and wanting topic clusters instead of random bookmarks
-- Security learners who want both conceptual foundations and secure coding practice
+- CS 핵심 과목을 더 선명한 흐름으로 공부하고 싶은 학생
+- 기본기를 다시 정리하려는 백엔드/시스템 지향 개발자
+- 랜덤 북마크보다 주제별 클러스터로 면접 대비를 하고 싶은 독자
+- 개념과 실전 시큐어 코딩을 함께 보고 싶은 보안 학습자
 
-## How the content is organized
+## 글은 이렇게 읽는 것이 좋습니다
 
-Most posts belong to a subject cluster and are easier to read as a sequence than as stand-alone articles. The best way to browse the archive is usually to start from one of the paths above, then use [Categories](/categories/) or [Archives](/archives/) to keep moving through the same topic.
+대부분의 글은 하나의 주제 클러스터 안에 묶여 있어서, 단독 글처럼 읽기보다 순서대로 따라가는 편이 훨씬 이해가 쉽습니다. 가장 좋은 방법은 위 경로 중 하나에서 시작한 뒤, [Categories](/categories/)나 [Archives](/archives/)를 이용해 같은 주제를 계속 따라가는 것입니다.
 
-The site already contains a large backlog of notes, so the main goal here is not to show everything at once. It is to help you find a strong starting point quickly and keep reading in a useful order.
+이미 글이 많이 쌓여 있기 때문에, 여기서의 목표는 모든 글을 한 번에 보여주는 것이 아닙니다. 빠르게 좋은 시작점을 찾고 유용한 순서로 계속 읽게 돕는 것이 더 중요합니다.
 
-## If you only choose one next click
+## 딱 한 번만 클릭한다면
 
-Pick the area you are studying right now and open the first post in that path. The rest of the site will make much more sense once you enter through a cluster instead of treating the archive like a flat list.
+지금 공부하고 있는 분야 하나를 골라 그 경로의 첫 글부터 열어보세요. 아카이브를 평면적인 목록처럼 보는 것보다 클러스터 안으로 들어가 읽을 때 이 사이트가 훨씬 더 잘 이해됩니다.
