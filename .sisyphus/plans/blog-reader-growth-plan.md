@@ -9,7 +9,6 @@ This plan assumes the blog grows mainly through:
 - organic search
 - internal reading flow
 - strong series entry pages
-- a small number of high-intent hub posts
 
 It does **not** assume that traffic will come mainly from posting more often.
 
@@ -112,34 +111,7 @@ Make the first click more likely to become the second click.
 
 New visitors understand what the blog is for and where to begin within 10 seconds.
 
-### Phase 2 - Build search-entry content (week 3-6)
-
-#### Objective
-
-Capture more search traffic through high-intent guide pages.
-
-#### Actions
-
-Create **2** search-entry hub posts first, one for each priority cluster:
-
-1. `How to study operating systems with this blog`
-2. `Secure coding roadmap for backend developers`
-
-These pages should not be random summaries. They should route readers into existing post sequences while still answering a real search intent on their own.
-
-Each hub post must contain:
-
-- a plain-language intro for beginners
-- who the guide is for
-- why the reading order is arranged this way
-- the specific posts selected and what each one contributes
-- a clear next click into the first post
-
-#### Expected result
-
-The blog gets more landing pages that match beginner and intermediate search intent.
-
-### Phase 3 - Strengthen post-to-post flow (week 4-8)
+### Phase 2 - Strengthen post-to-post flow (week 3-8)
 
 #### Objective
 
@@ -160,7 +132,7 @@ Increase pages per session and reduce bounce from isolated posts.
 
 More readers move from a search landing page into a deeper cluster.
 
-### Phase 4 - Improve click-through from titles and snippets (week 6-10)
+### Phase 3 - Improve click-through from titles and snippets (week 6-10)
 
 #### Objective
 
@@ -206,23 +178,7 @@ Best for:
 - beginner traffic
 - interview-prep traffic
 
-### Type 2 - Series bridge post
-
-Use for connecting multiple existing notes into one path.
-
-Examples:
-
-- operating system reading order
-- secure coding roadmap
-- networking essentials from intro to TCP
-
-Best for:
-
-- low-effort high-leverage growth using existing content
-- internal-link improvement
-- search queries with words like `roadmap`, `order`, `guide`, `beginner`
-
-### Type 3 - Comparison / decision post
+### Type 2 - Comparison / decision post
 
 Use for queries where the reader is deciding between concepts.
 
@@ -238,7 +194,7 @@ Best for:
 - high click potential
 - strong related-post linking
 
-### Type 4 - Practical bridge post
+### Type 3 - Practical bridge post
 
 Use for turning theory into action.
 
@@ -320,7 +276,6 @@ Good formulas:
 - `[topic] explained: [benefit]`
 - `[topic A] vs [topic B]: [decision angle]`
 - `How to study [subject]: [audience/use case]`
-- `[subject] roadmap for [reader type]`
 - `What is [topic]? [plain-language payoff]`
 
 Avoid titles that only make sense inside your own notebook sequence unless the series already has strong traffic.
@@ -389,9 +344,9 @@ Questions to answer:
 
 1. Did revised titles and descriptions improve entry traffic?
 2. Did the updated entry surfaces improve pages per session?
-3. Did either hub post become a meaningful landing page?
+3. Did the updated priority posts become more meaningful landing pages?
 
-If the answer is mostly no, pause new hub-post production and inspect content quality, title quality, and internal-link placement before scaling to more clusters.
+If the answer is mostly no, pause further content expansion and inspect content quality, title quality, and internal-link placement before scaling to more clusters.
 
 ## What not to spend time on first
 
@@ -408,10 +363,9 @@ If execution starts now, do these in order:
 1. Choose one analytics provider and document the exact key under `/_config.yml`.
 2. Refine `/_tabs/about.md` into a stronger entry page.
 3. Refine `/_tabs/series.md` into a more search- and reader-friendly curriculum hub.
-4. Create one OS roadmap post and one Security roadmap post.
-5. Add reading-flow blocks to the 12 shortlisted foundational posts.
-6. Rewrite titles and descriptions for the same 12 shortlisted posts.
-7. Add `social_preview_image` in `/_config.yml` only if a reusable image asset is ready.
+4. Add reading-flow blocks to the 12 shortlisted foundational posts.
+5. Rewrite titles and descriptions for the same 12 shortlisted posts.
+6. Add `social_preview_image` in `/_config.yml` only if a reusable image asset is ready.
 
 ## QA scenarios
 
@@ -436,19 +390,7 @@ If execution starts now, do these in order:
   4. Confirm OS and Security clusters are easy to scan and have a clear first click.
 - Expectation: a first-time reader can choose a path without using categories first.
 
-### QA for Phase 2 - Hub posts
-
-- Tool: `bundle exec jekyll build --baseurl ""`
-- Expectation: build completes successfully.
-- Tool: browser/manual verification
-- Steps:
-  1. Open the new OS roadmap post.
-  2. Confirm it answers a real beginner query, not only a list of links.
-  3. Click the first recommended OS post.
-  4. Repeat the same check for the Security roadmap post.
-- Expectation: each hub post is useful as a landing page and routes cleanly into the cluster.
-
-### QA for Phase 3 - Shortlisted post updates
+### QA for Phase 2 - Shortlisted post updates
 
 - Tool: `bundle exec jekyll build --baseurl ""`
 - Expectation: build completes successfully.
@@ -456,10 +398,10 @@ If execution starts now, do these in order:
 - Steps:
   1. Open three updated OS posts and three updated Security posts.
   2. Confirm each has a clear intro, next click, and series link.
-  3. Follow one chain from hub -> post -> next post in each cluster.
+  3. Follow one chain from entry page -> post -> next post in each cluster.
 - Expectation: readers can move through the cluster without relying on back navigation.
 
-### QA for Phase 4 - Title and metadata updates
+### QA for Phase 3 - Title and metadata updates
 
 - Tool: file inspection in priority post front matter
 - Steps:
@@ -472,7 +414,7 @@ If execution starts now, do these in order:
 
 This plan is working if:
 
-- search brings readers into hub posts and foundational explainers
+- search brings readers into foundational explainers and strengthened entry pages
 - readers move from one post to another inside the same cluster
 - the top traffic pages are no longer only chronological notes
 - the site behaves more like a learning product than a static archive

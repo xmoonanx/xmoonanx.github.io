@@ -107,6 +107,147 @@ tags는 검색과 탐색을 위한 보조 정보입니다.
 7. 글이 시퀀스 중간에 있다면 이전/다음/관련 글 흐름도 같이 보강합니다.
 8. 발행 전 평소 검증 명령을 실행합니다.
 
+## 프리미엄 에디토리얼 기준
+
+글을 단순한 수업 필기보다, 돈 내고 읽을 만한 정리 노트처럼 보이게 만들고 싶다면 아래 기준을 기본값으로 삼습니다.
+
+### 1. 제목 전략
+
+중요 글은 시퀀스 표기보다 개념을 먼저 보여주는 편이 좋습니다.
+
+이 블로그는 한국어 검색 유입이 우선이므로, visible title은 기본적으로 한국어 우선으로 작성합니다.
+
+- 추천: `핵심 개념: 구체 포인트 - 시리즈 파트`
+- 비추천: 중요한 글인데도 `[OS] Operating System(10-1): ...` 같은 내부 시퀀스 정보만 앞에 강하게 보이는 형태
+- 시리즈 번호는 버리지 말고, 가능하면 제목 뒤로 보내서 학습 경로는 유지하고 첫인상은 개선합니다.
+- 영어 용어는 검색이나 기술적 정확성을 높일 때만 보조적으로 섞습니다.
+
+예시:
+
+- `CPU Scheduling: FCFS, SJF, Round Robin의 핵심 - Operating System 5-1`
+- `OAuth2: 위임 인증이 작동하는 방식 - Secure Coding 5-2`
+- `Virtual Memory and Demand Paging - Operating System 10-1`
+- `CPU 스케줄링: FCFS, SJF, Round Robin의 핵심 - Operating System 5-1`
+- `OAuth2: 위임 인증이 작동하는 방식 - Secure Coding 5-2`
+- `가상 메모리와 Demand Paging - Operating System 10-1`
+
+프리미엄하게 느껴지는 제목의 조건은 다음과 같습니다.
+
+- 훑어볼 때 바로 개념이 보일 것
+- 독자가 얻는 범위나 payoff가 드러날 것
+- 내부 노트용 표기만 앞에 오지 않을 것
+- 시리즈 흐름은 남기되 제목 전체를 지배하지 않을 것
+- 실제 검색 독자의 언어와 제목 언어가 맞을 것
+
+### 2. description 전략
+
+major cluster의 새 글과 cornerstone 리라이트 글은 `description`을 사실상 필수로 취급합니다.
+
+`description`은 headline 아래에 붙는 editorial deck이라고 생각하면 됩니다. 아래 세 가지를 짧게 설명해야 합니다.
+
+1. 이 글이 무엇을 다루는지
+2. 왜 중요한지
+3. 더 큰 클러스터나 다음 개념과 어떻게 이어지는지
+
+실전 규칙:
+
+- 가능하면 120-160자 안팎으로 씁니다.
+- 1-2문장으로 끝냅니다.
+- `이 글은 X를 설명합니다` 같은 밋밋한 문장을 피합니다.
+- 추상적인 설명보다 독자가 얻는 실질적 이득을 씁니다.
+
+공식:
+
+```text
+이 글은 [개념]을 설명하고, 그것이 [시스템 / 면접 / 구현]에서 왜 중요한지, 그리고 [다음 개념 / 더 큰 시리즈]와 어떻게 이어지는지 정리한다.
+```
+
+예시:
+
+```yaml
+description: "CPU 스케줄링이 왜 필요한지, FCFS·SJF·Round Robin이 어떻게 다른지, 운영체제 설계에서 어떤 trade-off를 봐야 하는지 정리합니다."
+```
+
+### 3. 도입부 구조
+
+첫 화면에서 독자를 먼저 방향 잡아줘야 합니다.
+
+권장 순서:
+
+1. deck 성격의 짧은 도입 문단
+2. `What this post covers` 또는 `이 글에서 다루는 내용`
+3. 본격 설명
+
+중요 글은 `> 수업 정리` 한 줄이나 bare chapter label만 두고 바로 본론으로 들어가지 않는 편이 좋습니다.
+
+### 4. 프리미엄 스터디 노트 템플릿
+
+major cluster의 새 글과 핵심 글 리라이트에는 아래 구조를 기본으로 사용합니다.
+
+```yaml
+---
+title: "CPU Scheduling: FCFS, SJF, Round Robin의 핵심 - Operating System 5-1"
+description: "CPU 스케줄링이 왜 필요한지, 대표 알고리즘이 어떻게 다른지, 운영체제 설계에서 어떤 평가 기준이 중요한지 정리합니다."
+date: 2026-03-30 00:00:00 +0900
+categories: [CS, Operating System, OS]
+tags:
+  - [CS, OS, CPU Scheduling]
+toc: true
+toc_sticky: true
+---
+
+> 이 글은 CPU scheduling이 왜 필요한지, 대표 알고리즘이 무엇을 해결하는지, fairness·throughput·response time을 어떻게 비교해야 하는지 정리한다.
+
+## What this post covers
+
+- 왜 scheduling이 필요한가
+- 대표 알고리즘은 어떻게 다른가
+- 실전에서는 어떤 trade-off를 봐야 하는가
+
+## Core concept
+
+핵심 개념을 먼저 설명합니다.
+
+## Example or breakdown
+
+그림, 코드, 표, 단계별 비교를 넣습니다.
+
+## Key takeaways
+
+- 핵심 아이디어를 요약하고
+- 가장 중요한 trade-off를 짚고
+- 다음 개념으로 연결합니다.
+
+## Reading flow
+
+- Previous: `...`
+- Next: `...`
+- Series: `/series/`
+```
+
+### 5. 리라이트 우선순위
+
+전체 아카이브를 한 번에 뜯어고치지 않습니다.
+
+우선순위는 다음이 좋습니다.
+
+1. major cluster의 첫 글
+2. scheduling, paging, cache, OAuth2, JWT, SQL injection 같은 고신호 개념 글
+3. practice bridge 글
+4. 나머지는 실제로 손댈 일이 생길 때만 점진적으로 전환
+
+### 6. 프리미엄 = 화려함이 아님
+
+이 저장소에서 프리미엄한 느낌은 다음에서 나옵니다.
+
+- 강한 framing
+- 훑어보기 쉬운 제목과 description
+- 일정한 section rhythm
+- 깔끔한 요약
+- 다음 읽을 글 안내
+
+반대로 과한 카피, 긴 서론, 잡지풍 과장은 이 repo와 잘 맞지 않습니다.
+
 ## 글 수가 늘어날 때의 운영 규칙
 
 ### 큰 클러스터
@@ -134,11 +275,12 @@ tags는 검색과 탐색을 위한 보조 정보입니다.
 
 ## 바로 복사해서 쓰는 템플릿
 
-가능하면 가장 가까운 실제 글을 먼저 복사하는 것이 제일 좋습니다. 그래도 시작점이 필요하면 아래 형태를 씁니다.
+가능하면 가장 가까운 실제 글을 먼저 복사하는 것이 제일 좋습니다. 그래도 시작점이 필요하면 major cluster에서는 아래 형태를 기본값으로 씁니다.
 
 ```yaml
 ---
-title: "[OS] Operating System(11-1): Topic title"
+title: "핵심 개념: 구체 포인트 - Operating System 11-1"
+description: "이 글이 무엇을 다루고 왜 중요한지, 그리고 더 큰 클러스터와 어떻게 이어지는지 짧게 설명합니다."
 date: 2026-03-21 00:00:00 +0900
 categories: [CS, Operating System, OS]
 tags:
@@ -146,6 +288,8 @@ tags:
 toc: true
 toc_sticky: true
 ---
+
+> 본문 앞에 deck 성격의 짧은 도입 문단을 넣어 왜 이 글이 중요한지 먼저 설명합니다.
 
 ## What this post covers
 
@@ -167,6 +311,8 @@ toc_sticky: true
 ```
 
 주제에 맞게 cluster token, categories, tags 스타일만 바꿔서 사용하면 됩니다.
+
+이 템플릿 자체를 major cluster의 기본 프리미엄 템플릿으로 유지합니다.
 
 ## 클러스터별 실전 기본값
 
