@@ -1,5 +1,5 @@
 ---
-title: "[🔧Troubleshooting] Spring → FastAPI 프록시에서 JSESSIONID 전달 누락 버그"
+title: "[🍃Spring] Spring → FastAPI 프록시 JSESSIONID 전달 이슈"
 description: "Spring Boot가 FastAPI 프록시 역할을 할 때 JSESSIONID를 하위 서비스로 전달하지 않아 발생한 401 버그 — 원인 분석부터 MockMvc 테스트 함정까지 정리합니다."
 
 categories: [Troubleshooting, Spring]
@@ -13,11 +13,10 @@ last_modified_at: 2026-04-21
 image: ../assets/img/Spring/image.png
 ---
 
-*Spring Boot가 FastAPI 앞단 프록시 역할을 하는 구조에서, FastAPI가 Spring을 역호출할 때 **401**이 터지는 버그를 마주쳤다. 원인은 단순했지만 — `JSESSIONID`를 FastAPI로 전달하지 않은 것 — MockMvc에서 재현하는 과정에서 예상치 못한 함정이 있었다. 분석부터 테스트 픽스까지 기록한다.*
+> Spring Boot가 FastAPI 앞단 프록시 역할을 하는 구조에서, FastAPI가 Spring을 역호출할 때 **401**이 발생했다. 원인은 `JSESSIONID`를 FastAPI로 전달하지 않은 것이었고, MockMvc로 재현하는 과정에서도 `requestedSessionId`를 직접 설정해야 하는 함정이 있었다.
 
+## 이 글에서 다루는 내용
 ---
-
-## What this post covers
 
 - 이 글을 읽기 전에 알아두면 좋은 기본 개념
 - 문제 상황 및 요청 흐름 정리
@@ -25,9 +24,8 @@ image: ../assets/img/Spring/image.png
 - `HttpServletRequest`로 쿠키 포워딩 구현
 - MockMvc에서 `getRequestedSessionId()`가 `null`을 반환하는 이유와 해결법
 
+## 이 글을 읽기 전 필요한 배경
 ---
-
-## Background
 
 이 글은 Spring Boot가 FastAPI 앞단에서 프록시 역할을 하는 구조를 전제로 한다. 핵심은 브라우저가 FastAPI를 직접 호출하지 않고, 항상 Spring을 먼저 호출한다는 점이다.
 
@@ -40,8 +38,10 @@ image: ../assets/img/Spring/image.png
 이 구조에서 Spring은 사용자 세션 검증과 API 진입점을 담당하고, FastAPI는 챗봇·추천 같은 내부 기능을 담당한다. 그래서 프론트엔드는 FastAPI 주소나 내부 인증 키를 알 필요가 없다.
 
 ### Spring Proxy
+---
 
-프록시는 클라이언트 요청을 대신 받아서 다른 서버로 전달하는 중간 서버다. 여기서는 Spring Boot가 프록시다.
+📚 **<span style="color: #008000">Proxy</span>**: 클라이언트 요청을 대신 받아서 다른 서버로 전달하는 중간 서버  
+여기서는 Spring Boot가 프록시 역할을 한다.
 
 예를 들어 프론트가 아래 Spring API를 호출하면:
 
@@ -57,9 +57,11 @@ POST http://nutriagent-fastapi:8000/api/v1/chat/sessions/1/messages
 
 이렇게 하면 브라우저는 Spring만 바라보고, FastAPI는 Docker 내부 서비스로 숨길 수 있다.
 
-### `X-Internal-Key`
+### X-Internal-Key
+---
 
-`X-Internal-Key`는 서버끼리만 공유하는 내부 인증 헤더다. 사용자 인증용 비밀번호가 아니라, **이 요청이 외부 사용자가 아니라 Spring 같은 신뢰된 내부 서비스에서 온 요청인지** 확인하기 위한 값이다.
+📚 **<span style="color: #008000">X-Internal-Key</span>**: 서버끼리만 공유하는 내부 인증 헤더  
+사용자 인증용 비밀번호가 아니라, **이 요청이 외부 사용자가 아니라 Spring 같은 신뢰된 내부 서비스에서 온 요청인지** 확인하기 위한 값이다.
 
 ```text
 Spring ── X-Internal-Key ──► FastAPI
@@ -78,9 +80,11 @@ Spring -> FastAPI
 
 만약 FastAPI가 외부에 열려 있고 `X-Internal-Key` 검증이 없다면, 누군가가 Spring을 거치지 않고 FastAPI를 직접 호출할 수 있다. 그러면 Spring의 세션 검증을 우회할 수 있다. 그래서 FastAPI chat router에는 `Depends(verify_internal_call)`을 붙여 내부 키를 검증했다.
 
-### `JSESSIONID`
+### JSESSIONID
+---
 
-`JSESSIONID`는 Spring의 HTTP 세션을 식별하는 쿠키다. 브라우저가 Spring에 요청할 때 이 쿠키를 보내면, Spring은 서버에 저장된 세션에서 `GUEST_ID` 같은 값을 꺼낼 수 있다.
+📚 **<span style="color: #008000">JSESSIONID</span>**: Spring의 HTTP 세션을 식별하는 쿠키  
+브라우저가 Spring에 요청할 때 이 쿠키를 보내면, Spring은 서버에 저장된 세션에서 `GUEST_ID` 같은 값을 꺼낼 수 있다.
 
 ```text
 Cookie: JSESSIONID=abc123
@@ -95,7 +99,8 @@ String guestId = session != null ? (String) session.getAttribute("GUEST_ID") : n
 
 따라서 FastAPI가 나중에 Spring을 다시 호출해야 한다면, FastAPI도 유효한 `JSESSIONID`를 가지고 있어야 한다.
 
-### Docker `ports`와 `expose`
+### Docker ports와 expose
+---
 
 Docker Compose에서 `ports`와 `expose`는 다르다.
 
@@ -113,9 +118,8 @@ expose:
 
 `expose`는 같은 Docker 네트워크 안의 컨테이너끼리만 접근할 수 있게 한다. 이번 구조에서는 프론트가 FastAPI를 직접 호출하지 않으므로, FastAPI는 `ports` 대신 `expose`만 사용하는 편이 안전하다.
 
+## 문제 상황
 ---
-
-## Problem
 
 Spring Boot가 FastAPI 앞단 프록시 역할을 하는 구조에서, 챗봇 메시지 전송 API(`POST /sessions/{id}/messages`)를 호출하면 **FastAPI가 Spring의 onboarding 엔드포인트를 역으로 호출할 때 <span style="color: #cc0000">401</span>** 이 반환되는 문제가 발생했다.
 
@@ -152,7 +156,8 @@ cookies={"JSESSIONID": context.get("jsessionid", "")}
 
 문제는 Spring `ChatProxyController`가 브라우저 요청의 `JSESSIONID`를 FastAPI로 **전달하지 않았다** 는 것이다. FastAPI가 받는 `jsessionid`는 항상 `None`이었고, `context.get("jsessionid", "")` 는 빈 문자열을 반환했다.
 
-## Root Cause
+## 원인 분석
+---
 
 `ChatProxyController`의 `sendMessage`, `streamMessage`는 FastAPI로 보내는 헤더를 직접 구성한다. 당시 코드는 `X-Guest-Id`와 `X-Internal-Key`만 설정했고, **브라우저가 보낸 `JSESSIONID`를 `Cookie` 헤더로 포워딩하는 로직이 없었다.**
 
@@ -168,7 +173,8 @@ private HttpHeaders buildGuestHeaders(String guestId) {
 
 Spring은 자체 `HttpSession`에서 `guestId`를 꺼내는 방식이라 `JSESSIONID`를 직접 다루지 않아도 됐다. 하지만 **FastAPI가 그 값을 다시 Spring으로 전달해야 하는 상황** 을 고려하지 못했다.
 
-## Solution
+## 해결 방법
+---
 
 `HttpServletRequest`를 컨트롤러 파라미터로 주입받아, **<span style="color: #008000">`getRequestedSessionId()`</span>** 로 브라우저 세션 ID를 추출한 뒤 FastAPI 요청의 `Cookie` 헤더에 추가했다.
 
@@ -216,7 +222,8 @@ public ResponseEntity<StreamingResponseBody> streamMessage(...,
 }
 ```
 
-## Testing Gotcha: MockMvc에서 `getRequestedSessionId()` 는 null
+## 테스트 함정: MockMvc에서 getRequestedSessionId()는 null
+---
 
 테스트에서 `.session(authSession)`으로 세션을 주입하면 `getRequestedSessionId()`가 **`null`을 반환** 한다.
 
@@ -247,7 +254,8 @@ mockMvc.perform(post("/api/v1/chat/sessions/1/messages")
 assertThat(headers.getFirst(HttpHeaders.COOKIE)).contains("JSESSIONID=" + SESSION_ID);
 ```
 
-## Takeaway
+## 정리
+---
 
 - Spring이 직접 세션 인증을 처리하더라도, **<span style="color: #008000">하위 서비스가 그 세션을 역으로 사용해야 하는 경우</span>** 는 쿠키 포워딩을 명시적으로 구현해야 한다.
 - **<span style="color: #cc0000">MockMvc는 실제 서블릿 컨테이너의 쿠키 파싱 과정을 생략한다.</span>** `getRequestedSessionId()`처럼 쿠키에서 파생되는 값은 `RequestPostProcessor`로 수동 설정해야 테스트가 동작한다.
