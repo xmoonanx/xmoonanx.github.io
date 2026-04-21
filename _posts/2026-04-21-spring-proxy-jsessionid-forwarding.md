@@ -19,10 +19,99 @@ image: ../assets/img/Spring/image.png
 
 ## What this post covers
 
+- 이 글을 읽기 전에 알아두면 좋은 기본 개념
 - 문제 상황 및 요청 흐름 정리
 - `JSESSIONID` 미전달의 근본 원인
 - `HttpServletRequest`로 쿠키 포워딩 구현
 - MockMvc에서 `getRequestedSessionId()`가 `null`을 반환하는 이유와 해결법
+
+---
+
+## Background
+
+이 글은 Spring Boot가 FastAPI 앞단에서 프록시 역할을 하는 구조를 전제로 한다. 핵심은 브라우저가 FastAPI를 직접 호출하지 않고, 항상 Spring을 먼저 호출한다는 점이다.
+
+```
+브라우저
+  └─► Spring Boot
+        └─► FastAPI
+```
+
+이 구조에서 Spring은 사용자 세션 검증과 API 진입점을 담당하고, FastAPI는 챗봇·추천 같은 내부 기능을 담당한다. 그래서 프론트엔드는 FastAPI 주소나 내부 인증 키를 알 필요가 없다.
+
+### Spring Proxy
+
+프록시는 클라이언트 요청을 대신 받아서 다른 서버로 전달하는 중간 서버다. 여기서는 Spring Boot가 프록시다.
+
+예를 들어 프론트가 아래 Spring API를 호출하면:
+
+```text
+POST /api/v1/chat/sessions/1/messages
+```
+
+Spring은 내부에서 FastAPI의 실제 API를 호출한다.
+
+```text
+POST http://nutriagent-fastapi:8000/api/v1/chat/sessions/1/messages
+```
+
+이렇게 하면 브라우저는 Spring만 바라보고, FastAPI는 Docker 내부 서비스로 숨길 수 있다.
+
+### `X-Internal-Key`
+
+`X-Internal-Key`는 서버끼리만 공유하는 내부 인증 헤더다. 사용자 인증용 비밀번호가 아니라, **이 요청이 외부 사용자가 아니라 Spring 같은 신뢰된 내부 서비스에서 온 요청인지** 확인하기 위한 값이다.
+
+```text
+Spring ── X-Internal-Key ──► FastAPI
+```
+
+브라우저에는 이 값을 절대 내려주지 않는다. 브라우저가 알아야 할 인증 정보는 세션 쿠키뿐이다.
+
+```text
+브라우저 -> Spring
+  Cookie: JSESSIONID=...
+
+Spring -> FastAPI
+  X-Internal-Key: ...
+  X-Guest-Id: ...
+```
+
+만약 FastAPI가 외부에 열려 있고 `X-Internal-Key` 검증이 없다면, 누군가가 Spring을 거치지 않고 FastAPI를 직접 호출할 수 있다. 그러면 Spring의 세션 검증을 우회할 수 있다. 그래서 FastAPI chat router에는 `Depends(verify_internal_call)`을 붙여 내부 키를 검증했다.
+
+### `JSESSIONID`
+
+`JSESSIONID`는 Spring의 HTTP 세션을 식별하는 쿠키다. 브라우저가 Spring에 요청할 때 이 쿠키를 보내면, Spring은 서버에 저장된 세션에서 `GUEST_ID` 같은 값을 꺼낼 수 있다.
+
+```text
+Cookie: JSESSIONID=abc123
+```
+
+이 프로젝트의 Spring 컨트롤러들은 `@GuestId`를 통해 세션에서 guest id를 꺼낸다. 중요한 점은 `@GuestId`가 단순히 `X-Guest-Id` 헤더를 믿는 것이 아니라, Spring의 `HttpSession`을 본다는 것이다.
+
+```java
+HttpSession session = request.getSession(false);
+String guestId = session != null ? (String) session.getAttribute("GUEST_ID") : null;
+```
+
+따라서 FastAPI가 나중에 Spring을 다시 호출해야 한다면, FastAPI도 유효한 `JSESSIONID`를 가지고 있어야 한다.
+
+### Docker `ports`와 `expose`
+
+Docker Compose에서 `ports`와 `expose`는 다르다.
+
+```yaml
+ports:
+  - "8000:8000"
+```
+
+`ports`는 호스트 외부로 포트를 공개한다. 서버 IP와 포트를 알면 외부에서도 접근할 수 있다.
+
+```yaml
+expose:
+  - "8000"
+```
+
+`expose`는 같은 Docker 네트워크 안의 컨테이너끼리만 접근할 수 있게 한다. 이번 구조에서는 프론트가 FastAPI를 직접 호출하지 않으므로, FastAPI는 `ports` 대신 `expose`만 사용하는 편이 안전하다.
 
 ---
 
