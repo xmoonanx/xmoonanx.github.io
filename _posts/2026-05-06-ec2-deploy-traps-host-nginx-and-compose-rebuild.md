@@ -1,12 +1,25 @@
 ---
-title: "CD가 success인데 새 빌드가 EC2에 안 올라가던 두 가지 이유"
-date: 2026-05-06
-categories: [Engineering, DevOps]
-tags: [ec2, docker-compose, nginx, github-actions, ci-cd, debugging]
+title: "[DevOps] CD가 success인데 새 빌드가 EC2에 안 올라가던 두 가지 이유"
 description: "GitHub Actions가 success를 찍었는데 EC2의 컨테이너는 옛 빌드 그대로였다. 같은 호스트에 시스템 nginx가 살아있었고, CD 스크립트는 실제로 다시 빌드하지 않고 있었다."
+date: 2026-05-06 00:00:00 +0900
+categories: [Engineering, DevOps]
+tags:
+  - [ec2, docker-compose, nginx, github-actions, ci-cd, debugging]
+toc: true
+toc_sticky: true
+last_modified_at: 2026-05-06
 ---
 
-## Problem
+> EC2 single-host 구성에서 GitHub Actions CD가 success를 찍었는데, 실제로는 컨테이너가 새 빌드를 반영하지 않았다. 호스트 OS의 시스템 nginx가 80번 포트를 선점했고, CD 스크립트는 frontend 이미지를 명시적으로 빌드하지 않았다. 두 가지 함정의 원인과 해결 방법을 정리한다.
+
+## 이 글에서 다루는 내용
+
+- EC2에 시스템 nginx와 컨테이너 nginx가 충돌하는 이유와 안전한 교체 방법
+- `docker compose up -d`가 재빌드를 보장하지 않는 이유
+- CD 스크립트를 결정적으로 만드는 `git fetch + reset --hard` 패턴
+- 배포 완료를 검증하는 가장 빠른 방법 — 번들 hash와 Last-Modified
+
+## 문제 상황
 
 EC2 한 대에 컨테이너 세 개 — Spring(8080), FastAPI(8000), 정적 SPA를 서빙하는 nginx — 를 올리고 외부에서는 nginx의 80만 보이게 하는 single-host 구성으로 옮기는 작업을 했다. nginx 컨테이너가 정적 파일을 직접 서빙하면서 `/api/...`, `/profile`, `/meals` 같은 경로는 같은 docker 네트워크 안의 Spring으로 reverse proxy하는 식이다. 같은 오리진에서 모든 트래픽이 들어오므로 CORS/쿠키 SameSite 이슈가 자연 해소되는 게 장점이다.
 
@@ -22,7 +35,7 @@ failed to bind host port 0.0.0.0:80/tcp: address already in use
 
 `set -e` 덕분에 즉시 abort. 다행히 spring/fastapi 컨테이너는 force-recreate까지 마쳐 살아있었다.
 
-**2차** — 그 다음 PR(코드 변경)을 머지했더니 이번엔 CD가 깔끔히 success였다. 그런데 브라우저에서 동작이 그대로였다. 외부에서 번들을 뜯어보면 hash도, `Last-Modified`도 직전 배포 그대로였다.
+**2차** — 그 다음 PR(코드 변경)을 머지했더니 이번엔 CD가 깔끔히 success였다. 그런데 브라우저에서 동작이 그대로였다. 외부에서 번들을 뜯어보는 hash도, `Last-Modified`도 직전 배포 그대로였다.
 
 ```
 $ curl -sI http://13.220.247.35/ | grep -i last-modified
@@ -33,11 +46,11 @@ assets/index-BOZtEIUe.js                          # 직전 머지의 hash
 
 CD가 통과했는데 컨테이너는 옛 이미지 그대로. 두 사고는 표면 증상이 달랐지만 원인은 EC2와 docker compose의 같은 단면을 가리켰다.
 
-## Root Cause
+## 원인 분석
 
 ### 함정 1 — 호스트 OS의 시스템 nginx가 80을 점유 중
 
-EC2에 SSH로 들어가 80 점유자를 보면 컨테이너가 아니었다.
+EC2에 SSH로 들어가 80 점유자를 본 컨테이너가 아니었다.
 
 ```
 $ sudo ss -tlnp 'sport = :80'
@@ -82,7 +95,7 @@ KeyError: 'ContainerConfig'
 
 이건 legacy `docker-compose`(Python v1.29.2)가 BuildKit이 만드는 OCI manifest 이미지를 파싱하지 못하는 알려진 버그다. CD에서는 `docker compose`(공백, v2 플러그인)를 쓰고 있어서 정상 동작하지만, 사람이 SSH로 들어가 `sudo docker-compose`(하이픈, v1)을 쓰면 같은 컴포즈 파일이 다른 결과를 낸다. 같은 머신에 두 버전이 공존하는 환경에서 항상 만나는 함정이다.
 
-## Solution
+## 해결 방법
 
 ### 호스트 nginx 정지 + 컨테이너 nginx로 교체
 
@@ -141,7 +154,7 @@ $ curl -s http://13.220.247.35/ | grep -oE 'assets/index-[^"]+\.js'
 
 `Last-Modified`가 CD 종료 시각과 일치하고 번들 hash가 직전과 다르면, 그제서야 "배포되었다"라고 말한다.
 
-## Takeaway
+## 핵심 정리
 
 같은 호스트에 시스템 서비스와 컨테이너를 동거시키는 EC2 single-host 구성에서, CD success는 배포 성공의 충분조건이 아니다.
 
@@ -150,3 +163,9 @@ $ curl -s http://13.220.247.35/ | grep -oE 'assets/index-[^"]+\.js'
 - **`docker-compose`(v1)와 `docker compose`(v2)는 다른 도구다.** v1은 BuildKit/OCI 이미지에서 `ContainerConfig` KeyError로 죽는다. SSH 수동 작업할 때도 v2 플러그인을 쓴다.
 - **CD 스크립트의 git 동기화는 결정적이어야 한다.** `git pull`은 깨끗하지 않은 working tree에서 비결정적으로 실패한다. 단방향 갱신 디렉터리는 `fetch + reset --hard origin/<branch> + clean -fd`로 강제 일치시킨다.
 - **외부에서 번들 hash와 Last-Modified를 보는 것이 가장 빠른 배포 검증이다.** GitHub Actions의 success 표시보다 신뢰도가 높다.
+
+## Reading flow
+
+- Previous: `[🍃Spring] Spring → FastAPI 프록시 JSESSIONID 전달 이슈` — `_posts/spring/2026-04-21-spring-proxy-jsessionid-forwarding.md`
+- Next: `...`
+- Series: `/series/`
