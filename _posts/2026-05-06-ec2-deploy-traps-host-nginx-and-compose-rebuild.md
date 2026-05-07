@@ -1,12 +1,14 @@
 ---
 title: "[DevOps] CD가 success인데 새 빌드가 EC2에 안 올라가던 두 가지 이유"
 description: "GitHub Actions가 success를 찍었는데 EC2의 컨테이너는 옛 빌드 그대로였다. 같은 호스트에 시스템 nginx가 살아있었고, CD 스크립트는 실제로 다시 빌드하지 않고 있었다."
-date: 2026-05-06 00:00:00 +0900
+
 categories: [Engineering, DevOps]
 tags:
   - [ec2, docker-compose, nginx, github-actions, ci-cd, debugging]
 toc: true
 toc_sticky: true
+
+date: 2026-05-06
 last_modified_at: 2026-05-06
 ---
 
