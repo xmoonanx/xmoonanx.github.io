@@ -1,0 +1,73 @@
+<svg width="680" viewBox="0 0 680 380" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#444441" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <!-- Column headers -->
+  <text font-size="14" font-weight="500" fill="#2C2C2A" x="170" y="36" text-anchor="middle">VM</text>
+  <text font-size="14" font-weight="500" fill="#2C2C2A" x="510" y="36" text-anchor="middle">Container</text>
+
+  <!-- Center divider -->
+  <line x1="340" y1="46" x2="340" y2="362" stroke="#D3D1C7" stroke-width="0.5" stroke-dasharray="4 4"/>
+
+  <!-- VM outer dashed box -->
+  <rect x="30" y="48" width="280" height="184" rx="10" fill="#D3D1C7" stroke="#888780" stroke-width="1" stroke-dasharray="6 3"/>
+
+  <!-- App (VM) -->
+  <rect x="48" y="62" width="244" height="40" rx="6" fill="#B4B2A9" stroke="#5F5E5A" stroke-width="0.5"/>
+  <text font-size="14" font-weight="500" fill="#2C2C2A" x="170" y="86" text-anchor="middle" dominant-baseline="central">App</text>
+
+  <!-- Library (VM) -->
+  <rect x="48" y="114" width="244" height="40" rx="6" fill="#B4B2A9" stroke="#5F5E5A" stroke-width="0.5"/>
+  <text font-size="14" font-weight="500" fill="#2C2C2A" x="170" y="134" text-anchor="middle" dominant-baseline="central">Library / Runtime</text>
+
+  <!-- Guest Kernel (amber) -->
+  <rect x="48" y="166" width="244" height="52" rx="6" fill="#EF9F27" stroke="#633806" stroke-width="1"/>
+  <text font-size="14" font-weight="500" fill="#2C2C2A" x="170" y="184" text-anchor="middle" dominant-baseline="central">Guest Kernel</text>
+  <text font-size="12" font-weight="400" fill="#412402" x="170" y="204" text-anchor="middle" dominant-baseline="central">독립 커널</text>
+
+  <!-- Arrow: VM box to Hypervisor -->
+  <line x1="170" y1="232" x2="170" y2="246" stroke="#444441" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Hypervisor (purple) -->
+  <rect x="48" y="246" width="244" height="40" rx="6" fill="#7F77DD" stroke="#26215C" stroke-width="1"/>
+  <text font-size="14" font-weight="500" fill="#EEEDFE" x="170" y="266" text-anchor="middle" dominant-baseline="central">Hypervisor</text>
+
+  <!-- Arrow: Hypervisor to Hardware -->
+  <line x1="170" y1="286" x2="170" y2="320" stroke="#444441" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Container outer dashed box -->
+  <rect x="370" y="48" width="280" height="120" rx="10" fill="#D3D1C7" stroke="#888780" stroke-width="1" stroke-dasharray="6 3"/>
+
+  <!-- App (Container) -->
+  <rect x="388" y="62" width="244" height="40" rx="6" fill="#B4B2A9" stroke="#5F5E5A" stroke-width="0.5"/>
+  <text font-size="14" font-weight="500" fill="#2C2C2A" x="510" y="86" text-anchor="middle" dominant-baseline="central">App</text>
+
+  <!-- Library (Container) -->
+  <rect x="388" y="114" width="244" height="40" rx="6" fill="#B4B2A9" stroke="#5F5E5A" stroke-width="0.5"/>
+  <text font-size="14" font-weight="500" fill="#2C2C2A" x="510" y="134" text-anchor="middle" dominant-baseline="central">Library / Runtime</text>
+
+  <!-- Arrow: Container box to Syscall ABI -->
+  <line x1="510" y1="168" x2="510" y2="186" stroke="#444441" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Syscall ABI band (amber) -->
+  <rect x="370" y="186" width="280" height="26" rx="4" fill="#EF9F27" stroke="#633806" stroke-width="1"/>
+  <text font-size="12" font-weight="500" fill="#412402" x="510" y="199" text-anchor="middle" dominant-baseline="central">Syscall ABI</text>
+
+  <!-- Arrow: Syscall ABI to Host Kernel -->
+  <line x1="510" y1="212" x2="510" y2="226" stroke="#444441" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Host Kernel (teal) -->
+  <rect x="388" y="226" width="244" height="52" rx="6" fill="#1D9E75" stroke="#04342C" stroke-width="1"/>
+  <text font-size="14" font-weight="500" fill="#E1F5EE" x="510" y="244" text-anchor="middle" dominant-baseline="central">Host Kernel</text>
+  <text font-size="12" font-weight="400" fill="#E1F5EE" x="510" y="264" text-anchor="middle" dominant-baseline="central">공유 커널</text>
+
+  <!-- Arrow: Host Kernel to Hardware -->
+  <line x1="510" y1="278" x2="510" y2="320" stroke="#444441" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Hardware (shared, spans both columns) -->
+  <rect x="30" y="320" width="620" height="40" rx="6" fill="#888780" stroke="#444441" stroke-width="0.5"/>
+  <text font-size="14" font-weight="500" fill="#F1EFE8" x="340" y="340" text-anchor="middle" dominant-baseline="central">Hardware</text>
+</svg>
